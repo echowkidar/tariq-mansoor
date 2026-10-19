@@ -360,7 +360,27 @@
       border-bottom: 2px solid #031b3d !important;
     }
 
-    
+    /* Fixed Clean Translucent Styling for Header Glass Action Buttons across all Themes */
+    #mainHeader .glass-panel {
+      background: rgba(255, 255, 255, 0.16) !important;
+      border: 1px solid rgba(255, 255, 255, 0.28) !important;
+      color: #ffffff !important;
+      backdrop-filter: blur(12px) !important;
+      -webkit-backdrop-filter: blur(12px) !important;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+    }
+    #mainHeader .glass-panel:hover {
+      background: rgba(255, 255, 255, 0.26) !important;
+      border-color: rgba(255, 255, 255, 0.45) !important;
+    }
+    #mainHeader .glass-panel span {
+      color: #ffffff !important;
+    }
+    #mainHeader .glass-panel i,
+    #mainHeader .glass-panel i[class*="text-amber"] {
+      color: #fbbf24 !important;
+    }
+
     /* Public Visitors on '/' NEVER see Admin or Theme Switcher buttons; only authenticated Admin on '/admin' sees them */
     body:not(.admin-mode-active) .admin-only-control {
       display: none !important;
@@ -2855,6 +2875,18 @@ volumes:
       const badgeEl = document.getElementById("activeLayoutBadgeText");
       if (badgeEl) badgeEl.textContent = LAYOUT_LABELS[layout] || "Theme: Glass Statesman";
 
+      // Highlight active theme button in Admin Theme Switcher Bar
+      document.querySelectorAll("#adminThemeSwitcherBar [data-set-layout]").forEach(btn => {
+        const isSelected = btn.getAttribute("data-set-layout") === layout;
+        if (isSelected) {
+          btn.style.boxShadow = "0 0 0 2px #f59e0b, 0 4px 14px rgba(245, 158, 11, 0.4)";
+          btn.style.transform = "scale(1.04)";
+        } else {
+          btn.style.boxShadow = "none";
+          btn.style.transform = "scale(1)";
+        }
+      });
+
       // Apply Dark / Light Mode
       document.body.classList.remove("mode-dark", "mode-light");
       const mode = siteData.colorMode || "dark";
@@ -3926,16 +3958,76 @@ volumes:
       loadState();
       renderSite();
 
-      // Smooth Section Scrolling
+      // Smooth Section Scrolling (Supports All 7 Multi-Design Themes)
       document.body.addEventListener("click", (e) => {
         const scrollBtn = e.target.closest("[data-scroll-to]");
         if (scrollBtn) {
+          e.preventDefault();
           const targetId = scrollBtn.getAttribute("data-scroll-to");
-          const targetEl = document.getElementById(targetId);
-          if (targetEl) {
-            targetEl.scrollIntoView({ behavior: "smooth", block: "start" });
-            document.getElementById("mobileNavMenu").classList.add("hidden");
+          const activeLayout = siteData.layoutTheme || "glass-statesman";
+
+          let resolvedId = targetId;
+          if (activeLayout === "gadkari") {
+            const map = {
+              "heroSection": "TOP",
+              "wpHero": "TOP",
+              "aboutSection": "ngVisionarySec",
+              "positionsSection": "ngVisionarySec",
+              "legacySection": "ngCollageGrid",
+              "experienceSection": "ngFourVisionaryCols",
+              "educationSection": "ngFourVisionaryCols",
+              "pressSection": "ngPressSec",
+              "socialSection": "ngMentionsGrid",
+              "contactSection": "ngFooterSec"
+            };
+            if (map[targetId]) resolvedId = map[targetId];
+          } else if (activeLayout === "jpnadda") {
+            const map = {
+              "heroSection": "TOP",
+              "wpHero": "TOP",
+              "aboutSection": "jpnBioSection",
+              "positionsSection": "jpnJourneySection",
+              "legacySection": "jpnPositionsTimeline",
+              "experienceSection": "jpnEduList",
+              "educationSection": "jpnEduList",
+              "pressSection": "jpnMediaSection",
+              "socialSection": "jpnBlogSection",
+              "contactSection": "jpnContactSection"
+            };
+            if (map[targetId]) resolvedId = map[targetId];
+          } else if (activeLayout === "wordpress-original") {
+            const map = {
+              "heroSection": "TOP",
+              "wpHero": "TOP",
+              "aboutSection": "wpAbout",
+              "positionsSection": "wpRoleShowcase",
+              "legacySection": "wpRoleShowcase",
+              "experienceSection": "wpExperienceCards",
+              "educationSection": "wpEducationCards",
+              "pressSection": "wpPress",
+              "socialSection": "wpPress",
+              "contactSection": "wpContact"
+            };
+            if (map[targetId]) resolvedId = map[targetId];
           }
+
+          if (targetId === "heroSection" || targetId === "wpHero" || resolvedId === "TOP") {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+          } else {
+            const targetEl = document.getElementById(resolvedId) || document.getElementById(targetId);
+            if (targetEl) {
+              const headerEl = document.getElementById("mainHeader");
+              const headerOffset = headerEl ? headerEl.offsetHeight + 10 : 80;
+              const elementPosition = targetEl.getBoundingClientRect().top;
+              const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+              window.scrollTo({
+                top: Math.max(0, offsetPosition),
+                behavior: "smooth"
+              });
+            }
+          }
+          const mNav = document.getElementById("mobileNavMenu");
+          if (mNav) mNav.classList.add("hidden");
         }
 
         const openCmsTabBtn = e.target.closest("[data-open-cms-tab]");
