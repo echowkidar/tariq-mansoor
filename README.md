@@ -9,12 +9,13 @@
 - `docker-compose.yml` — Ready for Portainer Stacks deployment from GitHub.
 - `Dockerfile` — Production Node 20 Alpine container image.
 - `package.json` — Dependencies (`express`).
-- `.env.example` — Environment variables template (`ADMIN_PASSWORD`, `DOMAIN`, `PORT`).
+- `.env.example` — Environment variables template (`HOST_PORT`, `ADMIN_PASSWORD`, `DOMAIN`).
 
 ## Deploying via Portainer Stack (GitHub Repository)
-1. Push all files in this ZIP to your GitHub repository.
+1. Push all files in this repository to your GitHub repository.
 2. In Portainer -> **Stacks** -> **Add Stack** -> **Repository**, enter your GitHub repository URL and set Compose path to `docker-compose.yml`.
 3. Add Environment Variables in Portainer:
+   - `HOST_PORT=3080` (or any free port on host; default is 3080 to prevent port 3000 conflicts)
    - `DOMAIN=test.tariqmansoor.com` (or `tariqmansoor.com`)
    - `ADMIN_PASSWORD=YourStrongSecretPassword`
 4. Deploy the stack:
