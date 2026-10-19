@@ -178,36 +178,161 @@
     }
 
 
-    /* Light Mode Override Across Any Palette */
+    /* Universal Dark / Light Mode System Across All 7 Themes */
+    body.mode-dark {
+      --bg-primary: #070b14;
+      --bg-secondary: #0f172a;
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --glass-bg: rgba(15, 23, 42, 0.72);
+      --glass-border: rgba(255, 255, 255, 0.12);
+      background-color: #070b14 !important;
+      color: #f8fafc !important;
+    }
+
     body.mode-light {
       --bg-primary: #f8fafc !important;
       --bg-secondary: #ffffff !important;
       --text-primary: #0f172a !important;
       --text-secondary: #334155 !important;
-      --glass-bg: rgba(255, 255, 255, 0.85) !important;
+      --glass-bg: rgba(255, 255, 255, 0.88) !important;
       --glass-border: rgba(15, 23, 42, 0.12) !important;
-      box-shadow: none;
+      background-color: #f8fafc !important;
+      color: #0f172a !important;
     }
     body.mode-light .glass-panel,
     body.mode-light .glass-card {
       box-shadow: 0 12px 32px rgba(15, 23, 42, 0.07), inset 0 1px 0 rgba(255, 255, 255, 0.8);
     }
-    body.mode-light .text-white {
-      color: #0f172a !important;
-    }
-    body.mode-light .text-slate-300,
-    body.mode-light .text-slate-200 {
+    body.mode-light #modernMainContainer .text-slate-300,
+    body.mode-light #modernMainContainer .text-slate-200 {
       color: #334155 !important;
     }
-    body.mode-light .bg-slate-900,
-    body.mode-light .bg-slate-950\/60,
-    body.mode-light .bg-slate-950\/40,
-    body.mode-light .bg-slate-900\/50 {
+    body.mode-light #modernMainContainer .bg-slate-900,
+    body.mode-light #modernMainContainer .bg-slate-950\/60,
+    body.mode-light #modernMainContainer .bg-slate-950\/40,
+    body.mode-light #modernMainContainer .bg-slate-900\/50 {
       background-color: #f1f5f9 !important;
     }
     body.mode-light #cmsModal .text-white,
     body.mode-light #adminLoginModal .text-white {
       color: #f8fafc !important;
+    }
+
+    /* 1. Nitin Gadkari Style (Screenshot 2) Dark & Light Modes */
+    body.layout-gadkari.mode-dark {
+      --bg-primary: #070f1e !important;
+      --bg-secondary: #0b1930 !important;
+      --text-primary: #f8fafc !important;
+      --text-secondary: #94a3b8 !important;
+      --glass-bg: #0b1930 !important;
+      --glass-border: #1e3a6a !important;
+      background-color: #070f1e !important;
+      color: #f8fafc !important;
+    }
+    body.layout-gadkari.mode-dark #gadkariContainer {
+      background-color: #070f1e !important;
+      color: #f8fafc !important;
+    }
+    body.layout-gadkari.mode-dark #mainHeader {
+      background: #030812 !important;
+      border-bottom: 2px solid #1e3a6a !important;
+    }
+    body.layout-gadkari.mode-dark #ngVisionarySec h3,
+    body.layout-gadkari.mode-dark .text-\[\#052c65\] {
+      color: #60a5fa !important;
+    }
+    body.layout-gadkari.mode-dark .bg-white,
+    body.layout-gadkari.mode-dark .bg-slate-50,
+    body.layout-gadkari.mode-dark .bg-slate-100 {
+      background-color: #0d1e3a !important;
+      color: #f8fafc !important;
+    }
+    body.layout-gadkari.mode-dark .border-slate-200,
+    body.layout-gadkari.mode-dark .border-slate-300 {
+      border-color: #1e3a6a !important;
+    }
+    body.layout-gadkari.mode-dark .text-slate-900 {
+      color: #f8fafc !important;
+    }
+    body.layout-gadkari.mode-dark .text-slate-600,
+    body.layout-gadkari.mode-dark .text-slate-700 {
+      color: #94a3b8 !important;
+    }
+
+    /* 2. J.P. Nadda Style (Screenshot 3) Dark & Light Modes */
+    body.layout-jpnadda.mode-dark {
+      --bg-primary: #0b0f19 !important;
+      --bg-secondary: #111827 !important;
+      --text-primary: #f8fafc !important;
+      --text-secondary: #94a3b8 !important;
+      --glass-bg: #111827 !important;
+      --glass-border: #374151 !important;
+      background-color: #0b0f19 !important;
+      color: #f8fafc !important;
+    }
+    body.layout-jpnadda.mode-dark #jpnaddaContainer {
+      background-color: #0b0f19 !important;
+      color: #f8fafc !important;
+    }
+    body.layout-jpnadda.mode-dark #mainHeader {
+      background: #7c2d12 !important;
+      border-bottom: 2px solid #431407 !important;
+    }
+    body.layout-jpnadda.mode-dark .bg-white {
+      background-color: #111827 !important;
+      color: #f8fafc !important;
+    }
+    body.layout-jpnadda.mode-dark .bg-slate-50,
+    body.layout-jpnadda.mode-dark .bg-\[\#fafafa\],
+    body.layout-jpnadda.mode-dark .bg-amber-50\/40 {
+      background-color: #0d1424 !important;
+      color: #f8fafc !important;
+    }
+    body.layout-jpnadda.mode-dark .text-slate-900,
+    body.layout-jpnadda.mode-dark .text-slate-800 {
+      color: #f8fafc !important;
+    }
+    body.layout-jpnadda.mode-dark .text-slate-600,
+    body.layout-jpnadda.mode-dark .text-slate-700 {
+      color: #94a3b8 !important;
+    }
+    body.layout-jpnadda.mode-dark .border-slate-200,
+    body.layout-jpnadda.mode-dark .border-amber-200\/60 {
+      border-color: #1f2937 !important;
+    }
+
+    /* 3. Current WordPress Website Theme (Screenshot 1) Dark & Light Modes */
+    body.layout-wordpress-original.mode-light {
+      --bg-primary: #fbf9fd !important;
+      --bg-secondary: #ffffff !important;
+      --text-primary: #1e1b4b !important;
+      --text-secondary: #475569 !important;
+      background-color: #fbf9fd !important;
+      color: #1e1b4b !important;
+    }
+    body.layout-wordpress-original.mode-light #wpOriginalContainer {
+      background-color: #fbf9fd !important;
+      color: #1e1b4b !important;
+    }
+    body.layout-wordpress-original.mode-light #mainHeader {
+      background: #2e1065 !important;
+      border-bottom: 2px solid #1e0a45 !important;
+    }
+    body.layout-wordpress-original.mode-light .bg-\[\#0e0618\] {
+      background-color: #f3e8ff !important;
+      border-color: #d8b4fe !important;
+      color: #1e1b4b !important;
+    }
+    body.layout-wordpress-original.mode-light .bg-\[\#130a21\],
+    body.layout-wordpress-original.mode-light .bg-\[\#120921\] {
+      background-color: #ffffff !important;
+      border-color: #e9d5ff !important;
+      color: #1e1b4b !important;
+    }
+    body.layout-wordpress-original.mode-light .text-slate-300,
+    body.layout-wordpress-original.mode-light .text-slate-400 {
+      color: #475569 !important;
     }
 
     /* =================================================================== */
@@ -2893,6 +3018,18 @@ volumes:
       document.body.classList.add("mode-" + mode);
       const modeStatus = document.getElementById("cmsColorModeStatus");
       if (modeStatus) modeStatus.textContent = "Current: " + (mode === "light" ? "Light Mode" : "Dark Mode");
+
+      // Update Dark/Light Toggle Button Icon (Moon in light mode, Sun in dark mode)
+      const dlBtn = document.getElementById("darkLightToggleBtn");
+      if (dlBtn) {
+        dlBtn.setAttribute("title", mode === "light" ? "Switch to Dark Mode" : "Switch to Light Mode");
+        dlBtn.innerHTML = mode === "light"
+          ? '<i data-lucide="moon" class="w-4 h-4 text-slate-800"></i>'
+          : '<i data-lucide="sun" class="w-4 h-4 text-amber-400"></i>';
+      }
+      if (window.lucide) {
+        window.lucide.createIcons();
+      }
 
       // Three.js visibility
       const threeCanvas = document.getElementById("threeBgCanvas");
