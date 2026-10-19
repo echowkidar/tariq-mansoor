@@ -3851,6 +3851,9 @@ volumes:
     }
 
     function openCmsModal(tabName) {
+      if (window.__PORTAINER_API__ && window.__PORTAINER_API__.loadState) {
+        syncStateFromServerIfAvailable();
+      }
       populateCmsInputs();
       const modal = document.getElementById("cmsModal");
       modal.classList.remove("hidden");
@@ -3988,9 +3991,15 @@ volumes:
     async function syncStateFromServerIfAvailable() {
       if (window.__PORTAINER_API__ && window.__PORTAINER_API__.loadState) {
         const serverData = await window.__PORTAINER_API__.loadState();
-        if (serverData && serverData.hero) {
-          siteData = Object.assign({}, DEFAULT_SITE_DATA, serverData);
+        if (serverData && typeof serverData === "object" && Object.keys(serverData).length > 0) {
+          if (serverData.hero) {
+            siteData = Object.assign({}, DEFAULT_SITE_DATA, siteData, serverData);
+          }
+          if (Array.isArray(serverData.inbox)) {
+            siteData.inbox = serverData.inbox;
+          }
           renderSite();
+          populateCmsInputs();
         }
       }
     }
@@ -4402,6 +4411,7 @@ volumes:
           isAdminAuthenticated = true;
           try { sessionStorage.setItem("tm_admin_pass", entered); } catch (err) {}
           syncAdminUiMode();
+          await syncStateFromServerIfAvailable();
           loginModal.classList.add("hidden");
           loginModal.classList.remove("flex");
           openCmsModal(pendingCmsTab);
