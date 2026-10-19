@@ -1,0 +1,12 @@
+{
+  "name": "tariq-mansoor-portfolio-cms",
+  "version": "2.0.0",
+  "description": "Official Portfolio & Live CMS for Prof. Tariq Mansoor (Portainer Docker Stack)",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}

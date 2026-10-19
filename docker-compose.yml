@@ -1,0 +1,25 @@
+version: "3.8"
+
+services:
+  tariq-portfolio-cms:
+    build: .
+    container_name: tariq-mansoor-portfolio
+    restart: unless-stopped
+    ports:
+      - "${PORT:-3000}:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - DOMAIN=${DOMAIN:-test.tariqmansoor.com}
+      - ADMIN_PASSWORD=${ADMIN_PASSWORD:-TariqMansoor@2026}
+    volumes:
+      - tariq_cms_data:/app/data
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.tariq-test.rule=Host(`${DOMAIN:-test.tariqmansoor.com}`)"
+      - "traefik.http.routers.tariq-test.entrypoints=websecure"
+      - "traefik.http.routers.tariq-test.tls.certresolver=letsencrypt"
+      - "traefik.http.services.tariq-test.loadbalancer.server.port=3000"
+
+volumes:
+  tariq_cms_data:
