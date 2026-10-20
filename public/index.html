@@ -124,31 +124,32 @@
 
     /* Viewport Scroll Reveal Animation System */
     .reveal-item {
-      opacity: 0;
+      opacity: 1;
       will-change: transform, opacity;
       transition: opacity var(--anim-duration) cubic-bezier(0.16, 1, 0.3, 1),
                   transform var(--anim-duration) cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     .reveal-fade-up {
-      transform: translateY(38px);
+      transform: translateY(0);
     }
 
     .reveal-fade-left {
-      transform: translateX(-38px);
+      transform: translateX(0);
     }
 
     .reveal-fade-right {
-      transform: translateX(38px);
+      transform: translateX(0);
     }
 
     .reveal-zoom-in {
-      transform: scale(0.92);
+      transform: scale(1);
     }
 
+    body.admin-mode-active .reveal-item,
     .reveal-item.is-visible {
-      opacity: 1;
-      transform: translate(0, 0) scale(1);
+      opacity: 1 !important;
+      transform: none !important;
     }
 
     /* Ambient Mesh Orbs */
@@ -329,7 +330,10 @@
       box-shadow: 0 0 0 3px rgba(217, 119, 6, 0.15) !important;
     }
 
-    /* Keep Modals Content and Inputs Dark Glass */
+    /* Keep Modals Content and Inputs Dark Glass & Prevent Compositor Flickering */
+    #cmsModal {
+      background-color: rgba(6, 11, 24, 0.94) !important;
+    }
     body.mode-light #cmsModal .text-white,
     body.mode-light #adminLoginModal .text-white {
       color: #f8fafc !important;
@@ -817,20 +821,25 @@
         <span>Admin Mode (/admin) — Select Active Website Theme for All Visitors:</span>
       </span>
       <div class="flex flex-wrap items-center gap-1.5">
-        <button type="button" data-set-layout="wordpress-original" class="px-3 py-1 rounded-lg bg-[#8750f7]/25 hover:bg-[#8750f7]/40 text-purple-200 border border-purple-400/40 font-semibold transition">
-          1. tariqmansoor.com (Dark Purple WP)
+        <button type="button" data-set-layout="wordpress-original" class="px-3 py-1 rounded-lg bg-[#8750f7]/25 hover:bg-[#8750f7]/40 text-purple-200 border border-purple-400/40 font-semibold transition inline-flex items-center gap-1.5">
+          <i data-lucide="globe" class="w-3 h-3"></i>
+          <span>Dark Purple WP</span>
         </button>
-        <button type="button" data-set-layout="gadkari" class="px-3 py-1 rounded-lg bg-[#052c65] hover:bg-blue-900 text-white border border-blue-400/40 font-semibold transition">
-          2. nitingadkari.org.in (Navy Visionary)
+        <button type="button" data-set-layout="gadkari" class="px-3 py-1 rounded-lg bg-[#052c65] hover:bg-blue-900 text-white border border-blue-400/40 font-semibold transition inline-flex items-center gap-1.5">
+          <i data-lucide="award" class="w-3 h-3"></i>
+          <span>Navy Visionary</span>
         </button>
-        <button type="button" data-set-layout="jpnadda" class="px-3 py-1 rounded-lg bg-[#f26522] hover:bg-orange-600 text-white border border-orange-300/40 font-semibold transition">
-          3. jagatprakashnadda.in (Saffron Portal)
+        <button type="button" data-set-layout="jpnadda" class="px-3 py-1 rounded-lg bg-[#f26522] hover:bg-orange-600 text-white border border-orange-300/40 font-semibold transition inline-flex items-center gap-1.5">
+          <i data-lucide="landmark" class="w-3 h-3"></i>
+          <span>Saffron Portal</span>
         </button>
-        <button type="button" data-set-layout="glass-statesman" class="px-3 py-1 rounded-lg bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-400/40 font-semibold transition">
-          4. Royal Glass 3D (Default)
+        <button type="button" data-set-layout="glass-statesman" class="px-3 py-1 rounded-lg bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-400/40 font-semibold transition inline-flex items-center gap-1.5">
+          <i data-lucide="sparkles" class="w-3 h-3"></i>
+          <span>Royal Glass 3D</span>
         </button>
-        <button type="button" id="exitAdminViewBtn" class="ml-2 px-3 py-1 rounded-lg bg-rose-500/25 hover:bg-rose-500/40 text-rose-200 border border-rose-400/40 font-semibold transition">
-          Exit /admin (View as Public Visitor)
+        <button type="button" id="exitAdminViewBtn" class="ml-2 px-3 py-1 rounded-lg bg-rose-500/25 hover:bg-rose-500/40 text-rose-200 border border-rose-400/40 font-semibold transition inline-flex items-center gap-1.5">
+          <i data-lucide="log-out" class="w-3 h-3"></i>
+          <span>Exit Admin View</span>
         </button>
       </div>
     </div>
@@ -2020,14 +2029,14 @@
       <div class="glass-panel rounded-3xl w-full max-w-6xl border border-white/20 overflow-hidden shadow-2xl">
         
         <!-- CMS Header Bar -->
-        <div class="px-5 sm:px-8 py-5 border-b border-white/10 flex flex-wrap items-center justify-between gap-4 bg-slate-950/60">
+        <div class="px-5 sm:px-8 py-5 border-b border-white/10 flex flex-wrap items-center justify-between gap-4 bg-slate-950/70">
           <div class="flex items-center gap-3">
-            <div class="w-10 h-10 rounded-xl accent-btn flex items-center justify-center">
-              <i data-lucide="sliders-horizontal" class="w-5 h-5"></i>
+            <div class="w-10 h-10 rounded-xl accent-btn flex items-center justify-center shadow-lg">
+              <i data-lucide="shield-check" class="w-5 h-5"></i>
             </div>
             <div>
-              <h2 class="font-serif-display text-lg sm:text-xl font-bold text-white">Portfolio Admin Control Panel (Live CMS)</h2>
-              <p class="text-xs text-slate-300">Update Hero, Bio, Images, Held Positions, Experience, Education, Press, Contact &amp; Animations in Real Time</p>
+              <h2 class="font-serif-display text-lg sm:text-xl font-bold text-white tracking-wide">Executive Administration Portal</h2>
+              <p class="text-xs text-slate-300">Live Content Management &amp; Official Document Administration for Prof. Tariq Mansoor</p>
             </div>
           </div>
 
@@ -2037,70 +2046,70 @@
             </span>
             <button type="button" id="cmsPublishLiveBtn" class="px-3.5 py-2 rounded-xl text-xs font-bold bg-emerald-600 hover:bg-emerald-500 text-white transition inline-flex items-center gap-1.5 shadow-lg">
               <i data-lucide="globe" class="w-3.5 h-3.5"></i>
-              <span>Publish to Website</span>
+              <span>Publish Changes</span>
             </button>
             <button type="button" id="cmsResetDefaultBtn" class="px-3 py-2 rounded-xl text-xs font-semibold bg-rose-500/20 text-rose-300 border border-rose-500/30 hover:bg-rose-500/30 transition inline-flex items-center gap-1.5">
               <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i>
-              <span>Reset to Default</span>
+              <span>Reset Defaults</span>
             </button>
             <button type="button" id="cmsExportJsonBtn" class="px-3 py-2 rounded-xl text-xs font-semibold bg-white/10 text-white hover:bg-white/20 transition inline-flex items-center gap-1.5">
               <i data-lucide="download" class="w-3.5 h-3.5"></i>
-              <span>Export JSON</span>
+              <span>Export JSON Backup</span>
             </button>
-            <button type="button" id="closeCmsBtn" class="px-4 py-2 rounded-xl text-xs font-semibold accent-btn inline-flex items-center gap-1.5">
+            <button type="button" id="closeCmsBtn" class="px-4 py-2 rounded-xl text-xs font-semibold accent-btn inline-flex items-center gap-1.5 shadow-md">
               <i data-lucide="check" class="w-4 h-4"></i>
-              <span>Done &amp; View Site</span>
+              <span>Close &amp; View Site</span>
             </button>
           </div>
         </div>
 
         <!-- CMS Body Layout: Sidebar Tabs + Editor Pane -->
-        <div class="grid grid-cols-1 lg:grid-cols-12 min-h-[580px]">
+        <div class="grid grid-cols-1 lg:grid-cols-12 min-h-[600px]">
           
           <!-- Left Sidebar Tabs -->
-          <div class="lg:col-span-3 border-b lg:border-b-0 lg:border-r border-white/10 p-4 space-y-1.5 bg-slate-950/40">
-            <button type="button" data-cms-tab="hero" class="cms-tab-btn w-full text-left px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold flex items-center gap-2.5 bg-amber-500/20 text-amber-300 border border-amber-400/30">
+          <div class="lg:col-span-3 border-b lg:border-b-0 lg:border-r border-white/10 p-4 space-y-1 bg-slate-950/50">
+            <button type="button" data-cms-tab="hero" class="cms-tab-btn w-full text-left px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold flex items-center gap-2.5 bg-amber-500/20 text-amber-300 border border-amber-400/30 transition">
               <i data-lucide="sparkles" class="w-4 h-4"></i>
-              <span>1. Hero &amp; Images</span>
+              <span>Hero &amp; Branding</span>
             </button>
-            <button type="button" data-cms-tab="about" class="cms-tab-btn w-full text-left px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold flex items-center gap-2.5 hover:bg-white/5 text-slate-200">
+            <button type="button" data-cms-tab="about" class="cms-tab-btn w-full text-left px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold flex items-center gap-2.5 hover:bg-white/5 text-slate-200 border border-transparent transition">
               <i data-lucide="user" class="w-4 h-4"></i>
-              <span>2. About &amp; AMU Legacy</span>
+              <span>Biography &amp; Legacy</span>
             </button>
-            <button type="button" data-cms-tab="positions" class="cms-tab-btn w-full text-left px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold flex items-center gap-2.5 hover:bg-white/5 text-slate-200">
+            <button type="button" data-cms-tab="positions" class="cms-tab-btn w-full text-left px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold flex items-center gap-2.5 hover:bg-white/5 text-slate-200 border border-transparent transition">
               <i data-lucide="briefcase" class="w-4 h-4"></i>
-              <span>3. Held Positions</span>
+              <span>Held Positions</span>
             </button>
-            <button type="button" data-cms-tab="experience" class="cms-tab-btn w-full text-left px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold flex items-center gap-2.5 hover:bg-white/5 text-slate-200">
+            <button type="button" data-cms-tab="experience" class="cms-tab-btn w-full text-left px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold flex items-center gap-2.5 hover:bg-white/5 text-slate-200 border border-transparent transition">
               <i data-lucide="list-ordered" class="w-4 h-4"></i>
-              <span>4. Experience (13 Roles)</span>
+              <span>Career Timeline</span>
             </button>
-            <button type="button" data-cms-tab="education" class="cms-tab-btn w-full text-left px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold flex items-center gap-2.5 hover:bg-white/5 text-slate-200">
+            <button type="button" data-cms-tab="education" class="cms-tab-btn w-full text-left px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold flex items-center gap-2.5 hover:bg-white/5 text-slate-200 border border-transparent transition">
               <i data-lucide="graduation-cap" class="w-4 h-4"></i>
-              <span>5. Education &amp; Awards</span>
+              <span>Education &amp; Honors</span>
             </button>
-            <button type="button" data-cms-tab="press" class="cms-tab-btn w-full text-left px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold flex items-center gap-2.5 hover:bg-white/5 text-slate-200">
+            <button type="button" data-cms-tab="press" class="cms-tab-btn w-full text-left px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold flex items-center gap-2.5 hover:bg-white/5 text-slate-200 border border-transparent transition">
               <i data-lucide="newspaper" class="w-4 h-4"></i>
-              <span>6. Press &amp; Media</span>
+              <span>Press &amp; Media</span>
             </button>
-            <button type="button" data-cms-tab="contact" class="cms-tab-btn w-full text-left px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold flex items-center justify-between hover:bg-white/5 text-slate-200">
+            <button type="button" data-cms-tab="contact" class="cms-tab-btn w-full text-left px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold flex items-center justify-between hover:bg-white/5 text-slate-200 border border-transparent transition">
               <span class="flex items-center gap-2.5">
                 <i data-lucide="inbox" class="w-4 h-4"></i>
-                <span>7. Contact &amp; Inbox</span>
+                <span>Messages Inbox</span>
               </span>
-              <span id="cmsInboxCountBadge" class="px-2 py-0.5 text-[10px] rounded-full bg-amber-500 text-slate-950 font-bold">1</span>
+              <span id="cmsInboxCountBadge" class="px-2 py-0.5 text-[10px] rounded-full bg-amber-500 text-slate-950 font-bold">0</span>
             </button>
-            <button type="button" data-cms-tab="design" class="cms-tab-btn w-full text-left px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold flex items-center gap-2.5 hover:bg-white/5 text-slate-200">
-              <i data-lucide="wand-2" class="w-4 h-4"></i>
-              <span>8. Theme &amp; Animations</span>
+            <button type="button" data-cms-tab="design" class="cms-tab-btn w-full text-left px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold flex items-center gap-2.5 hover:bg-white/5 text-slate-200 border border-transparent transition">
+              <i data-lucide="palette" class="w-4 h-4"></i>
+              <span>Appearance &amp; Themes</span>
             </button>
-            <button type="button" data-cms-tab="cvstudio" class="cms-tab-btn w-full text-left px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold flex items-center gap-2.5 hover:bg-white/5 text-amber-300 border border-amber-400/20">
+            <button type="button" data-cms-tab="cvstudio" class="cms-tab-btn w-full text-left px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold flex items-center gap-2.5 hover:bg-white/5 text-amber-300 border border-amber-400/20 transition">
               <i data-lucide="file-text" class="w-4 h-4"></i>
-              <span>9. CV &amp; Profile PDF Studio</span>
+              <span>Curriculum Vitae (CV)</span>
             </button>
-            <button type="button" data-cms-tab="portainer" class="cms-tab-btn w-full text-left px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold flex items-center gap-2.5 hover:bg-white/5 text-emerald-300 border border-emerald-400/20">
-              <i data-lucide="container" class="w-4 h-4"></i>
-              <span>10. Portainer &amp; Env Setup</span>
+            <button type="button" data-cms-tab="profilestudio" class="cms-tab-btn w-full text-left px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold flex items-center gap-2.5 hover:bg-white/5 text-sky-300 border border-sky-400/20 transition">
+              <i data-lucide="user-check" class="w-4 h-4"></i>
+              <span>Executive Profile</span>
             </button>
           </div>
 
@@ -2387,31 +2396,31 @@
                 <label class="block text-xs font-bold uppercase tracking-wider text-amber-400">WordPress-Style Structural Website Theme (Changes Full Page Layout &amp; Architecture)</label>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <button type="button" data-set-layout="glass-statesman" class="layout-choice-btn p-4 rounded-2xl border border-amber-400 bg-black/40 text-left">
-                    <span class="block font-bold text-sm text-amber-300">1. Royal Glass Statesman (Default)</span>
+                    <span class="block font-bold text-sm text-amber-300">Royal Glass Statesman (Default)</span>
                     <span class="block text-xs text-slate-300 mt-1">Floating glassmorphism, asymmetric split hero, 2-col bento grid &amp; Three.js 3D constellation</span>
                   </button>
                   <button type="button" data-set-layout="editorial-chronicle" class="layout-choice-btn p-4 rounded-2xl border border-white/15 bg-black/40 text-left">
-                    <span class="block font-bold text-sm text-white">2. The Aligarh Chronicle (Editorial Magazine)</span>
+                    <span class="block font-bold text-sm text-white">The Aligarh Chronicle (Editorial Magazine)</span>
                     <span class="block text-xs text-slate-300 mt-1">Classic double-ruled masthead, serif drop-caps, broadsheet columns &amp; top-bordered cards</span>
                   </button>
                   <button type="button" data-set-layout="executive-sidebar" class="layout-choice-btn p-4 rounded-2xl border border-white/15 bg-black/40 text-left">
-                    <span class="block font-bold text-sm text-white">3. Sovereign Split-Studio (Left Profile Rail)</span>
+                    <span class="block font-bold text-sm text-white">Sovereign Split-Studio (Left Profile Rail)</span>
                     <span class="block text-xs text-slate-300 mt-1">Fixed left portrait &amp; navigation command rail with scrolling right-hand content stream</span>
                   </button>
                   <button type="button" data-set-layout="architectural-grid" class="layout-choice-btn p-4 rounded-2xl border border-white/15 bg-black/40 text-left">
-                    <span class="block font-bold text-sm text-white">4. Swiss Architectural Minimalist</span>
+                    <span class="block font-bold text-sm text-white">Swiss Architectural Minimalist</span>
                     <span class="block text-xs text-slate-300 mt-1">Sharp zero-radius architectural grid, exposed hairline borders &amp; bold accent left bars</span>
                   </button>
                   <button type="button" data-set-layout="wordpress-original" class="layout-choice-btn p-4 rounded-2xl border border-purple-400/50 bg-purple-950/40 text-left">
-                    <span class="block font-bold text-sm text-purple-300">5. Current Live WordPress Theme (`tariqmansoor.com`)</span>
+                    <span class="block font-bold text-sm text-purple-300">Current Live WordPress Theme (`tariqmansoor.com`)</span>
                     <span class="block text-xs text-slate-300 mt-1">Exact current WordPress layout: My Recent Works, side-by-side Experience &amp; Education</span>
                   </button>
                   <button type="button" data-set-layout="jpnadda" class="layout-choice-btn p-4 rounded-2xl border border-orange-400/50 bg-orange-950/40 text-left">
-                    <span class="block font-bold text-sm text-orange-300">6. J.P. Nadda Official Theme (`jagatprakashnadda.in`)</span>
+                    <span class="block font-bold text-sm text-orange-300">J.P. Nadda Official Theme (`jagatprakashnadda.in`)</span>
                     <span class="block text-xs text-slate-300 mt-1">Saffron statesman portal, quote splash header, chronological Positions Held table &amp; gallery</span>
                   </button>
                   <button type="button" data-set-layout="gadkari" class="layout-choice-btn sm:col-span-2 p-4 rounded-2xl border border-amber-400/50 bg-slate-950/80 text-left">
-                    <span class="block font-bold text-sm text-amber-300">7. Nitin Gadkari Official Theme (`nitingadkari.org.in`)</span>
+                    <span class="block font-bold text-sm text-amber-300">Nitin Gadkari Official Theme (`nitingadkari.org.in`)</span>
                     <span class="block text-xs text-slate-300 mt-1">'A Visionary' full-bleed banner, 4-Pillar vision strip, Landmark Records &amp; Honours grid, @Mentions wall &amp; Press Releases</span>
                   </button>
                 </div>
@@ -2448,233 +2457,194 @@
               </div>
             </div>
 
-            <!-- TAB 9: CV & PROFILE PDF STUDIO (MULTI-DESIGN + DEFAULT AS-IS LOCK + 3-WAY UPDATE SCOPE) -->
+            <!-- TAB: CURRICULUM VITAE (CV) STUDIO -->
             <div id="cmsPane-cvstudio" class="cms-pane hidden space-y-6">
-              <div class="flex flex-wrap items-center justify-between gap-2 border-b border-white/10 pb-3">
+              <div class="flex flex-wrap items-center justify-between gap-3 border-b border-white/10 pb-3">
                 <div>
-                  <h3 class="text-lg font-bold text-amber-400">CV &amp; Profile Multi-Design Studio &amp; Update Scope</h3>
-                  <p class="text-xs text-slate-300">Keep existing CV &amp; Profile PDF settings as-is, or customize typography, choose from 4 designs, and select whether updates apply to Website, PDF, or Both.</p>
+                  <h3 class="text-lg font-bold text-amber-400 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-5 h-5 text-amber-400"></i>
+                    <span>Official Curriculum Vitae (CV) Management</span>
+                  </h3>
+                  <p class="text-xs text-slate-300">Dedicated editor for Prof. Tariq Mansoor's Academic &amp; Clinical Curriculum Vitae (CV) PDF and surgical qualifications.</p>
                 </div>
-                <button type="button" id="restoreDefaultCvPdfBtn" class="px-3.5 py-2 rounded-xl text-xs font-semibold bg-amber-500/20 text-amber-300 border border-amber-400/40 hover:bg-amber-500/30">
-                  Keep / Restore Existing Default PDF &amp; Page Settings As-Is
+                <div class="flex items-center gap-2">
+                  <button type="button" id="restoreDefaultCvBtn" class="px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-amber-500/20 text-amber-300 border border-amber-400/40 hover:bg-amber-500/30 transition">
+                    Restore Default CV
+                  </button>
+                  <a id="previewActiveCvBtn" href="https://tariqmansoor.com/wp-content/uploads/2025/11/Profile-of-Prof.-Tariq-Mansoor-12.03.2025.pdf" target="_blank" rel="noopener noreferrer" class="px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-white/10 hover:bg-white/20 text-white transition inline-flex items-center gap-1.5">
+                    <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                    <span>Open Active CV PDF</span>
+                  </a>
+                </div>
+              </div>
+
+              <!-- Active CV Document Status Card -->
+              <div class="p-4 rounded-2xl bg-black/40 border border-amber-400/30 space-y-4">
+                <div class="flex flex-wrap items-center justify-between gap-3">
+                  <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center shrink-0">
+                      <i data-lucide="file-check" class="w-5 h-5"></i>
+                    </div>
+                    <div>
+                      <span class="text-xs font-bold text-white block">Active Curriculum Vitae (CV) PDF Document</span>
+                      <span id="cvActiveFilenameBadge" class="text-xs text-amber-300">Currently using: Official Academic CV (Default)</span>
+                    </div>
+                  </div>
+                  <label class="px-4 py-2.5 rounded-xl accent-btn text-xs font-bold cursor-pointer inline-flex items-center gap-2 shadow-lg">
+                    <i data-lucide="upload-cloud" class="w-4 h-4"></i>
+                    <span>Upload New CV PDF (.pdf)</span>
+                    <input id="uploadCvPdfInput" type="file" accept="application/pdf" class="hidden" />
+                  </label>
+                </div>
+
+                <div>
+                  <label class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1.5">Direct CV PDF Download URL / Link</label>
+                  <div class="flex gap-2">
+                    <input id="cmsCvPdfUrl" type="text" class="w-full px-3.5 py-2.5 rounded-xl bg-black/50 border border-white/15 text-xs font-mono text-white" placeholder="https://..." />
+                    <button type="button" id="saveCvUrlBtn" class="px-4 py-2.5 rounded-xl accent-btn text-xs font-semibold shrink-0">Save CV Link</button>
+                  </div>
+                  <p class="text-[11px] text-slate-400 mt-1">Visitors clicking "Download CV" across all themes are directed to this active PDF document.</p>
+                </div>
+              </div>
+
+              <!-- Academic & Surgical Qualifications Overview -->
+              <div class="p-4 sm:p-5 rounded-2xl bg-black/30 border border-white/10 space-y-4">
+                <h4 class="text-xs font-bold uppercase tracking-wider text-amber-400 flex items-center gap-2">
+                  <i data-lucide="award" class="w-4 h-4"></i>
+                  <span>Academic &amp; Surgical Qualifications Overview</span>
+                </h4>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label class="block text-xs font-semibold uppercase text-slate-300 mb-1">Academic Credentials &amp; Degrees</label>
+                    <input id="cvAcademicTitle" type="text" class="w-full px-3.5 py-2 rounded-xl bg-black/40 border border-white/15 text-xs text-white" />
+                  </div>
+                  <div>
+                    <label class="block text-xs font-semibold uppercase text-slate-300 mb-1">Specialization &amp; Discipline</label>
+                    <input id="cvSpecialization" type="text" class="w-full px-3.5 py-2 rounded-xl bg-black/40 border border-white/15 text-xs text-white" />
+                  </div>
+                  <div>
+                    <label class="block text-xs font-semibold uppercase text-slate-300 mb-1">Clinical &amp; Teaching Tenure</label>
+                    <input id="cvTeachingExp" type="text" class="w-full px-3.5 py-2 rounded-xl bg-black/40 border border-white/15 text-xs text-white" />
+                  </div>
+                  <div>
+                    <label class="block text-xs font-semibold uppercase text-slate-300 mb-1">Publications &amp; Theses Supervised</label>
+                    <input id="cvResearchStat" type="text" class="w-full px-3.5 py-2 rounded-xl bg-black/40 border border-white/15 text-xs text-white" />
+                  </div>
+                </div>
+                <div>
+                  <label class="block text-xs font-semibold uppercase text-slate-300 mb-1">Curriculum Vitae (CV) Summary</label>
+                  <textarea id="cvAcademicSummary" rows="4" class="w-full px-3.5 py-2.5 rounded-xl bg-black/40 border border-white/15 text-xs leading-relaxed text-white"></textarea>
+                </div>
+                <button type="button" id="saveCvDetailsBtn" class="accent-btn px-5 py-2.5 rounded-xl text-xs font-bold inline-flex items-center gap-2">
+                  <i data-lucide="save" class="w-4 h-4"></i>
+                  <span>Save CV Details</span>
                 </button>
               </div>
+            </div>
 
-              <!-- 1. 3-Way Update Target Scope Selector -->
-              <div class="p-4 rounded-2xl bg-black/40 border border-amber-400/30 space-y-3">
-                <label class="block text-xs font-bold uppercase tracking-wider text-amber-400">
-                  Step 1: Select Where Your CV &amp; Profile Changes Should Apply
-                </label>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
-                  <label class="p-3.5 rounded-xl bg-black/40 border border-white/15 flex items-start gap-2.5 cursor-pointer hover:border-amber-400/60">
-                    <input type="radio" name="cvUpdateScope" value="pdf-only" checked class="mt-1 accent-amber-500" />
-                    <div class="text-xs">
-                      <span class="font-bold block text-white">1. Update Only CV &amp; Profile PDF</span>
-                      <span class="text-slate-300">Website sections stay untouched; only downloadable CV &amp; Profile PDF updates.</span>
-                    </div>
-                  </label>
-                  <label class="p-3.5 rounded-xl bg-black/40 border border-white/15 flex items-start gap-2.5 cursor-pointer hover:border-amber-400/60">
-                    <input type="radio" name="cvUpdateScope" value="website-only" class="mt-1 accent-amber-500" />
-                    <div class="text-xs">
-                      <span class="font-bold block text-white">2. Update Only Website Content</span>
-                      <span class="text-slate-300">Website bio &amp; roles update; existing default CV &amp; Profile PDF download stays untouched.</span>
-                    </div>
-                  </label>
-                  <label class="p-3.5 rounded-xl bg-black/40 border border-white/15 flex items-start gap-2.5 cursor-pointer hover:border-amber-400/60">
-                    <input type="radio" name="cvUpdateScope" value="both" class="mt-1 accent-amber-500" />
-                    <div class="text-xs">
-                      <span class="font-bold block text-white">3. Update Both Website &amp; PDF</span>
-                      <span class="text-slate-300">Synchronizes updates across both the live website and downloadable CV/Profile PDF.</span>
-                    </div>
-                  </label>
+            <!-- TAB: EXECUTIVE PROFILE STUDIO -->
+            <div id="cmsPane-profilestudio" class="cms-pane hidden space-y-6">
+              <div class="flex flex-wrap items-center justify-between gap-3 border-b border-white/10 pb-3">
+                <div>
+                  <h3 class="text-lg font-bold text-sky-400 flex items-center gap-2">
+                    <i data-lucide="user-check" class="w-5 h-5 text-sky-400"></i>
+                    <span>Official Executive Profile &amp; Biography Management</span>
+                  </h3>
+                  <p class="text-xs text-slate-300">Dedicated editor for Prof. Tariq Mansoor's Political &amp; Statesman Executive Profile PDF document and dossier.</p>
+                </div>
+                <div class="flex items-center gap-2">
+                  <button type="button" id="restoreDefaultProfileBtn" class="px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-sky-500/20 text-sky-300 border border-sky-400/40 hover:bg-sky-500/30 transition">
+                    Restore Default Profile
+                  </button>
+                  <a id="previewActiveProfileBtn" href="https://tariqmansoor.com/wp-content/uploads/2025/11/Profile-of-Prof.-Tariq-Mansoor-12.03.2025.pdf" target="_blank" rel="noopener noreferrer" class="px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-white/10 hover:bg-white/20 text-white transition inline-flex items-center gap-1.5">
+                    <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                    <span>Open Active Profile PDF</span>
+                  </a>
                 </div>
               </div>
 
-              <!-- 2. Selectable CV & Profile Design Templates (4 Designs) -->
+              <!-- Active Profile Document Status Card -->
+              <div class="p-4 rounded-2xl bg-black/40 border border-sky-400/30 space-y-4">
+                <div class="flex flex-wrap items-center justify-between gap-3">
+                  <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-sky-500/20 text-sky-400 flex items-center justify-center shrink-0">
+                      <i data-lucide="file-check" class="w-5 h-5"></i>
+                    </div>
+                    <div>
+                      <span class="text-xs font-bold text-white block">Active Executive Profile PDF Document</span>
+                      <span id="profileActiveFilenameBadge" class="text-xs text-sky-300">Currently using: Official Executive Profile (Default)</span>
+                    </div>
+                  </div>
+                  <label class="px-4 py-2.5 rounded-xl bg-sky-600 hover:bg-sky-500 text-white text-xs font-bold cursor-pointer inline-flex items-center gap-2 shadow-lg transition">
+                    <i data-lucide="upload-cloud" class="w-4 h-4"></i>
+                    <span>Upload New Profile PDF (.pdf)</span>
+                    <input id="uploadProfilePdfInput" type="file" accept="application/pdf" class="hidden" />
+                  </label>
+                </div>
+
+                <div>
+                  <label class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1.5">Direct Profile PDF Download URL / Link</label>
+                  <div class="flex gap-2">
+                    <input id="cmsProfilePdfUrl" type="text" class="w-full px-3.5 py-2.5 rounded-xl bg-black/50 border border-white/15 text-xs font-mono text-white" placeholder="https://..." />
+                    <button type="button" id="saveProfileUrlBtn" class="px-4 py-2.5 rounded-xl bg-sky-600 hover:bg-sky-500 text-white text-xs font-semibold shrink-0 transition">Save Profile Link</button>
+                  </div>
+                  <p class="text-[11px] text-slate-400 mt-1">Visitors clicking "Download Profile" or "Official Dossier" are directed to this active PDF document.</p>
+                </div>
+              </div>
+
+              <!-- Executive Profile Document Design Template -->
               <div class="space-y-2.5">
                 <label class="block text-xs font-bold uppercase tracking-wider text-slate-300">
-                  Step 2: Choose CV &amp; Profile Document Design Template
+                  Choose Executive Profile Document Design Template
                 </label>
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-                  <button type="button" data-cv-template="default-official" class="cv-tpl-btn p-3.5 rounded-xl border border-amber-400 bg-amber-500/20 text-left">
-                    <span class="block text-xs font-bold text-amber-300">1. Existing Official Dossier</span>
-                    <span class="block text-[11px] text-slate-300 mt-1">Default As-Is serif format matching current PDF</span>
+                  <button type="button" data-cv-template="default-official" class="cv-tpl-btn p-3.5 rounded-xl border border-sky-400 bg-sky-500/20 text-left transition">
+                    <span class="block text-xs font-bold text-sky-300">Official Dossier</span>
+                    <span class="block text-[11px] text-slate-300 mt-1">Default As-Is serif format matching current official PDF</span>
                   </button>
-                  <button type="button" data-cv-template="statesman-gold" class="cv-tpl-btn p-3.5 rounded-xl border border-white/15 bg-black/40 text-left">
-                    <span class="block text-xs font-bold text-white">2. Statesman Royal Crest</span>
+                  <button type="button" data-cv-template="statesman-gold" class="cv-tpl-btn p-3.5 rounded-xl border border-white/15 bg-black/40 text-left transition">
+                    <span class="block text-xs font-bold text-white">Statesman Royal Crest</span>
                     <span class="block text-[11px] text-slate-300 mt-1">Gold header border with 2-column executive sidebar</span>
                   </button>
-                  <button type="button" data-cv-template="harvard-academic" class="cv-tpl-btn p-3.5 rounded-xl border border-white/15 bg-black/40 text-left">
-                    <span class="block text-xs font-bold text-white">3. Academic &amp; Medical CV</span>
-                    <span class="block text-[11px] text-slate-300 mt-1">Classic university curriculum vitae with rule dividers</span>
+                  <button type="button" data-cv-template="harvard-academic" class="cv-tpl-btn p-3.5 rounded-xl border border-white/15 bg-black/40 text-left transition">
+                    <span class="block text-xs font-bold text-white">Academic &amp; Medical</span>
+                    <span class="block text-[11px] text-slate-300 mt-1">Classic university layout with rule dividers</span>
                   </button>
-                  <button type="button" data-cv-template="modern-executive" class="cv-tpl-btn p-3.5 rounded-xl border border-white/15 bg-black/40 text-left">
-                    <span class="block text-xs font-bold text-white">4. Modern Executive Grid</span>
-                    <span class="block text-[11px] text-slate-300 mt-1">Clean sans-serif header banner &amp; structured cards</span>
+                  <button type="button" data-cv-template="modern-executive" class="cv-tpl-btn p-3.5 rounded-xl border border-white/15 bg-black/40 text-left transition">
+                    <span class="block text-xs font-bold text-white">Modern Executive Grid</span>
+                    <span class="block text-[11px] text-slate-300 mt-1">Clean dark banner with structured card columns</span>
                   </button>
                 </div>
               </div>
 
-              <!-- 3. Page & Typography Settings (With "Keep Default Settings As-Is" Option) -->
-              <div class="p-4 rounded-2xl bg-black/30 border border-white/10 space-y-4">
-                <div class="flex flex-wrap items-center justify-between gap-2">
-                  <h4 class="text-xs font-bold uppercase tracking-wider text-amber-400">Step 3: Page &amp; Typography Formatting Settings</h4>
-                  <label class="inline-flex items-center gap-2 text-xs cursor-pointer">
-                    <input id="cvKeepDefaultSettingsCheck" type="checkbox" checked class="accent-amber-500" />
-                    <span class="font-semibold text-amber-300">Keep Existing Default Typography &amp; Margins As-Is (11pt Times, 1.35 Line Spacing, 20mm Margin)</span>
-                  </label>
-                </div>
-
-                <div class="grid grid-cols-2 sm:grid-cols-5 gap-3">
-                  <div>
-                    <label class="block text-[11px] text-slate-300 mb-1">Font Family</label>
-                    <select id="cvFontFamily" class="w-full px-2.5 py-2 rounded-lg bg-slate-900 border border-white/15 text-xs">
-                      <option value="'Times New Roman', Times, serif">Times New Roman (Default)</option>
-                      <option value="Georgia, serif">Georgia Serif</option>
-                      <option value="'Playfair Display', serif">Playfair Display</option>
-                      <option value="'Inter', sans-serif">Inter Clean Sans</option>
-                      <option value="Garamond, serif">Classic Garamond</option>
-                    </select>
-                  </div>
-                  <div>
-                    <label class="block text-[11px] text-slate-300 mb-1">Font Size</label>
-                    <select id="cvFontSize" class="w-full px-2.5 py-2 rounded-lg bg-slate-900 border border-white/15 text-xs">
-                      <option value="10pt">10 pt (Compact)</option>
-                      <option value="11pt" selected>11 pt (Default)</option>
-                      <option value="12pt">12 pt (Standard)</option>
-                      <option value="13pt">13 pt (Large)</option>
-                    </select>
-                  </div>
-                  <div>
-                    <label class="block text-[11px] text-slate-300 mb-1">Line Spacing</label>
-                    <select id="cvLineSpacing" class="w-full px-2.5 py-2 rounded-lg bg-slate-900 border border-white/15 text-xs">
-                      <option value="1.15">1.15 (Tight)</option>
-                      <option value="1.35" selected>1.35 (Default)</option>
-                      <option value="1.5">1.50 (Comfortable)</option>
-                      <option value="1.75">1.75 (Double-lite)</option>
-                    </select>
-                  </div>
-                  <div>
-                    <label class="block text-[11px] text-slate-300 mb-1">Paragraph Space</label>
-                    <select id="cvParaSpacing" class="w-full px-2.5 py-2 rounded-lg bg-slate-900 border border-white/15 text-xs">
-                      <option value="8px">8 px</option>
-                      <option value="12px" selected>12 px (Default)</option>
-                      <option value="16px">16 px</option>
-                      <option value="20px">20 px</option>
-                    </select>
-                  </div>
-                  <div>
-                    <label class="block text-[11px] text-slate-300 mb-1">Page Margins (A4)</label>
-                    <select id="cvPageMargin" class="w-full px-2.5 py-2 rounded-lg bg-slate-900 border border-white/15 text-xs">
-                      <option value="12mm">12 mm (Narrow)</option>
-                      <option value="20mm" selected>20 mm (Default)</option>
-                      <option value="25mm">25 mm (Wide)</option>
-                    </select>
-                  </div>
-                </div>
-              </div>
-
-              <!-- 4. Editable CV & Profile Dossier Text + Direct PDF Upload -->
+              <!-- Editable Dossier Content + Live Preview Sheet -->
               <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
                 <div class="lg:col-span-6 space-y-3">
-                  <label class="block text-xs font-bold uppercase tracking-wider text-slate-300">Edit CV &amp; Profile Dossier Content</label>
-                  <input id="cvDocHeaderTitle" type="text" class="w-full px-3 py-2 rounded-xl bg-black/40 border border-white/15 text-xs font-bold" value="PROF. TARIQ MANSOOR: A BRIEF PROFILE &amp; CURRICULUM VITAE" />
-                  <input id="cvDocSubtitle" type="text" class="w-full px-3 py-2 rounded-xl bg-black/40 border border-white/15 text-xs" value="National Vice President, B.J.P. • Member, Legislative Council, U.P. • Former Vice-Chancellor, A.M.U. (2017–2023)" />
-                  <textarea id="cvDocBodyText" rows="9" class="w-full px-3 py-2 rounded-xl bg-black/40 border border-white/15 text-xs leading-relaxed"></textarea>
+                  <label class="block text-xs font-bold uppercase tracking-wider text-slate-300">Edit Executive Profile Text &amp; Headings</label>
+                  <input id="cvDocHeaderTitle" type="text" class="w-full px-3 py-2 rounded-xl bg-black/40 border border-white/15 text-xs font-bold text-white" value="PROF. TARIQ MANSOOR: A BRIEF PROFILE" />
+                  <input id="cvDocSubtitle" type="text" class="w-full px-3 py-2 rounded-xl bg-black/40 border border-white/15 text-xs text-white" value="National Vice President, B.J.P. • Member, Legislative Council, U.P. • Former Vice-Chancellor, A.M.U." />
+                  <textarea id="cvDocBodyText" rows="9" class="w-full px-3 py-2 rounded-xl bg-black/40 border border-white/15 text-xs leading-relaxed text-white"></textarea>
 
                   <div class="flex flex-wrap gap-2 pt-1">
-                    <button type="button" id="applyCvStudioChangesBtn" class="accent-btn px-4 py-2.5 rounded-xl text-xs font-bold inline-flex items-center gap-1.5">
+                    <button type="button" id="applyCvStudioChangesBtn" class="accent-btn px-4 py-2.5 rounded-xl text-xs font-bold inline-flex items-center gap-1.5 shadow-md">
                       <i data-lucide="check-circle" class="w-4 h-4"></i>
-                      <span>Apply Update &amp; Generate Active PDF</span>
+                      <span>Apply Changes &amp; Generate PDF</span>
                     </button>
-                    <button type="button" id="downloadStyledCvPdfBtn" class="px-4 py-2.5 rounded-xl text-xs font-semibold bg-white/10 hover:bg-white/20 inline-flex items-center gap-1.5">
-                      <i data-lucide="file-down" class="w-4 h-4 text-amber-400"></i>
-                      <span>Download Styled PDF File</span>
+                    <button type="button" id="downloadStyledCvPdfBtn" class="px-4 py-2.5 rounded-xl text-xs font-semibold bg-white/10 hover:bg-white/20 inline-flex items-center gap-1.5 text-white">
+                      <i data-lucide="file-down" class="w-4 h-4 text-sky-400"></i>
+                      <span>Download Styled PDF</span>
                     </button>
-                  </div>
-
-                  <!-- Upload Custom PDF File Option -->
-                  <div class="p-3.5 rounded-xl bg-black/40 border border-white/10 space-y-2">
-                    <p class="text-xs font-semibold text-amber-300">Or Upload a Ready-Made PDF for CV / Profile Download:</p>
-                    <div class="flex flex-wrap items-center gap-2">
-                      <label class="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-xs cursor-pointer inline-flex items-center gap-1.5">
-                        <i data-lucide="upload-cloud" class="w-3.5 h-3.5 text-amber-400"></i>
-                        <span>Upload Custom Profile / CV (.PDF)</span>
-                        <input id="uploadCustomPdfInput" type="file" accept="application/pdf" class="hidden" />
-                      </label>
-                      <span id="uploadedPdfFilename" class="text-[11px] text-slate-400">Currently using: Official Default PDF</span>
-                    </div>
                   </div>
                 </div>
 
                 <!-- Live A4 Document Preview Sheet -->
                 <div class="lg:col-span-6">
-                  <label class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-2">Live A4 Document Preview (Selected Design &amp; Settings)</label>
+                  <label class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-2">Live A4 Document Preview</label>
                   <div class="rounded-2xl bg-slate-200 p-3 max-h-[420px] overflow-y-auto shadow-inner">
                     <div id="cvLivePreviewSheet" class="bg-white text-slate-900 shadow-lg mx-auto rounded-sm" style="padding: 20mm; font-family: 'Times New Roman', Times, serif; font-size: 11pt; line-height: 1.35;">
-                      <!-- Rendered dynamically by renderCvPreviewSheet() -->
                     </div>
                   </div>
                 </div>
-              </div>
-            </div>
-
-            <!-- TAB 10: PORTAINER DOCKER STACK & ENVIRONMENT VARIABLE SETUP -->
-            <div id="cmsPane-portainer" class="cms-pane hidden space-y-5">
-              <div class="border-b border-white/10 pb-3">
-                <h3 class="text-lg font-bold text-emerald-400">Portainer Docker Stack &amp; GitHub Deployment (`test.tariqmansoor.com`)</h3>
-                <p class="text-xs text-slate-300 mt-1">
-                  Admin authentication uses the <code class="text-amber-300">ADMIN_PASSWORD</code> environment variable injected via Portainer Stack. You can also test changing the active runtime password below.
-                </p>
-              </div>
-
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div class="p-4 rounded-2xl bg-black/40 border border-emerald-400/30 space-y-2">
-                  <span class="text-[11px] font-bold uppercase tracking-wider text-emerald-400">Target Subdomain &amp; Stack</span>
-                  <p class="text-sm font-bold">https://test.tariqmansoor.com</p>
-                  <p class="text-xs text-slate-300">Deployed via Portainer Stack from GitHub Repository with persistent volume <code class="text-amber-300">tariq_cms_data:/app/data</code></p>
-                </div>
-
-                <div class="p-4 rounded-2xl bg-black/40 border border-amber-400/30 space-y-2">
-                  <label class="block text-[11px] font-bold uppercase tracking-wider text-amber-400">Runtime ADMIN_PASSWORD Override (Preview Test)</label>
-                  <div class="flex gap-2">
-                    <input id="cmsAdminPassInput" type="text" value="TariqMansoor@2026" class="w-full px-3 py-1.5 rounded-lg bg-black/50 border border-white/15 text-xs font-mono" />
-                    <button type="button" id="saveAdminPassBtn" class="px-3 py-1.5 rounded-lg accent-btn text-xs font-semibold shrink-0">Update</button>
-                  </div>
-                  <p class="text-[11px] text-slate-400">In Portainer production, set <code class="text-amber-300">ADMIN_PASSWORD</code> in the Stack Environment Variables UI.</p>
-                </div>
-              </div>
-
-              <div class="space-y-2">
-                <div class="flex items-center justify-between">
-                  <span class="text-xs font-bold uppercase tracking-wider text-slate-300">Portainer Stack `docker-compose.yml` (GitHub Repo Stack)</span>
-                  <button type="button" id="copyDockerComposeBtn" class="px-3 py-1 rounded-lg bg-white/10 hover:bg-white/20 text-xs font-semibold inline-flex items-center gap-1.5">
-                    <i data-lucide="copy" class="w-3.5 h-3.5"></i>
-                    <span>Copy Compose File</span>
-                  </button>
-                </div>
-                <pre id="dockerComposeCodeBlock" class="p-4 rounded-2xl bg-slate-950 border border-white/10 text-[11px] font-mono text-emerald-300 overflow-x-auto leading-relaxed">version: "3.8"
-services:
-  tariq-portfolio-cms:
-    build: .
-    container_name: tariq-mansoor-portfolio
-    restart: unless-stopped
-    ports:
-      - "${PORT:-3000}:3000"
-    environment:
-      - NODE_ENV=production
-      - PORT=3000
-      - DOMAIN=${DOMAIN:-test.tariqmansoor.com}
-      - ADMIN_PASSWORD=${ADMIN_PASSWORD:-TariqMansoor@2026}
-    volumes:
-      - tariq_cms_data:/app/data
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.tariq-test.rule=Host(`test.tariqmansoor.com`)"
-      - "traefik.http.routers.tariq-test.tls.certresolver=letsencrypt"
-
-volumes:
-  tariq_cms_data:</pre>
               </div>
             </div>
 
@@ -2809,6 +2779,28 @@ volumes:
       lastPublishedAt: "Oct 2026",
       glassBlur: 18,
       animDuration: 0.75,
+      cv: {
+        activePdfUrl: OFFICIAL_EXISTING_PDF_URL,
+        uploadedFilename: "Official Academic CV (Default)",
+        academicTitle: "Prof. Tariq Mansoor, MBBS, MS (Surgery), FICS",
+        specialization: "General & Laparoscopic Surgery • Medical Education • University Governance",
+        teachingExp: "40+ Years Clinical Teaching & Surgical Practice at JN Medical College, AMU",
+        researchStat: "120+ Published Research Papers • 62 PG Medical Theses Supervised",
+        academicSummary: "Comprehensive academic and surgical Curriculum Vitae spanning over four decades in surgical practice, clinical medical education, Department Chairmanship, and Vice-Chancellorship of Aligarh Muslim University."
+      },
+      profile: {
+        activePdfUrl: OFFICIAL_EXISTING_PDF_URL,
+        uploadedFilename: "Official Executive Profile (Default)",
+        headerTitle: "PROF. TARIQ MANSOOR: A BRIEF PROFILE",
+        subtitle: "National Vice President, B.J.P. • Member of Legislative Council, Uttar Pradesh (w.e.f. April 2023)",
+        bodyText: "Prof. Tariq Mansoor is currently the National Vice President, B.J.P. and Member of Legislative Council, Uttar Pradesh (Nominated by Hon'ble Governor, UP) w.e.f April 2023 for a period of six years. Earlier he was Vice-Chancellor of Aligarh Muslim University (2017-2023) – a historic seat of learning established in 1920. Prior to that, he served as the Principal of Jawaharlal Nehru Medical College & Hospital – the largest teaching and tertiary medical care centre in western U.P.– and also as Head of Department of Surgery in A.M.U. With about four decades of teaching, research, clinical and administrative experience, he has 120 publications to his credit and supervised thesis of 62 postgraduate medical students.\n\nHe was nominated by the Hon'ble Prime Minister of India to serve as a Member of the Padma Awards Committee for the years 2023, 2024 & 2025. He has also been a member of the Medical Council of India, Member of the Board of Governors of IIM Lucknow, the Governing Body of the Maulana Azad Education Foundation, and the National Manifesto Committee of the BJP for Lok Sabha elections 2024.\n\nAs Vice-Chancellor of AMU, he established College of Nursing, Para Medical College, Department of Cardiology and Centres for Bio Medical Engineering, Artificial Intelligence, Green & Renewable Energy, and Dara Shikoh Centre for Interfaith Understanding & Dialogue. During his term, AMU was accredited A+ Grade by NAAC and granted Category II Autonomy by UGC.",
+        template: "default-official",
+        fontFamily: "'Times New Roman', Times, serif",
+        fontSize: "11pt",
+        lineSpacing: "1.35",
+        paraSpacing: "12px",
+        pageMargin: "20mm"
+      },
       cvStudio: {
         isDefaultPdf: true,
         activePdfUrl: OFFICIAL_EXISTING_PDF_URL,
@@ -3244,7 +3236,7 @@ volumes:
       const showImgs = siteData.showCardImages !== false;
       const posGrid = document.getElementById("positionsGrid");
       posGrid.innerHTML = siteData.positions.map(pos => `
-        <article class="glass-card rounded-3xl overflow-hidden flex flex-col justify-between reveal-item reveal-fade-up">
+        <article class="glass-card rounded-3xl overflow-hidden flex flex-col justify-between reveal-item is-visible reveal-fade-up">
           <div>
             ${showImgs && pos.image ? `
               <div class="h-48 w-full overflow-hidden bg-slate-900 relative border-b border-white/10">
@@ -3325,7 +3317,7 @@ volumes:
       document.getElementById("pressGrid").innerHTML = siteData.press.map((pr, idx) => {
         const cardImg = pr.image || (idx % 2 === 0 ? siteData.hero.aboutImage : siteData.hero.heroImage);
         return `
-        <article class="glass-card rounded-2xl overflow-hidden flex flex-col justify-between reveal-item reveal-fade-up">
+        <article class="glass-card rounded-2xl overflow-hidden flex flex-col justify-between reveal-item is-visible reveal-fade-up">
           <div>
             ${showImgs && cardImg ? `
               <div class="h-40 w-full overflow-hidden bg-slate-900 border-b border-white/10">
@@ -3371,32 +3363,38 @@ volumes:
       const railImg = document.getElementById("railPortraitImg");
       if (railImg) railImg.src = siteData.hero.heroImage || window.FALLBACK_PORTRAIT_SVG;
 
-      // Sync CV & Profile Download Links (Preserves Existing Default PDF unless updated in CV Studio)
+      // Sync CV & Profile Download Links (Preserves Existing Default PDF unless updated)
+      if (!siteData.cv) siteData.cv = JSON.parse(JSON.stringify(DEFAULT_SITE_DATA.cv));
+      if (!siteData.profile) siteData.profile = JSON.parse(JSON.stringify(DEFAULT_SITE_DATA.profile));
       if (!siteData.cvStudio) siteData.cvStudio = JSON.parse(JSON.stringify(DEFAULT_SITE_DATA.cvStudio));
-      const activeProfUrl = siteData.cvStudio.isDefaultPdf
-        ? OFFICIAL_EXISTING_PDF_URL
-        : (siteData.cvStudio.activePdfUrl || OFFICIAL_EXISTING_PDF_URL);
-      const activeCvUrl = siteData.cvStudio.isDefaultPdf
-        ? OFFICIAL_EXISTING_PDF_URL
-        : (siteData.cvStudio.activeCvUrl || activeProfUrl);
+
+      const activeProfUrl = (siteData.profile && siteData.profile.activePdfUrl) || siteData.hero.profilePdfUrl || (siteData.cvStudio && siteData.cvStudio.activePdfUrl) || OFFICIAL_EXISTING_PDF_URL;
+      const activeCvUrl = (siteData.cv && siteData.cv.activePdfUrl) || (siteData.cvStudio && siteData.cvStudio.activeCvUrl) || OFFICIAL_EXISTING_PDF_URL;
 
       const heroProfLink = document.getElementById("heroProfilePdfLink");
       const heroCvLink = document.getElementById("heroCvPdfLink");
       const modalProfBtn = document.getElementById("modalProfilePdfBtn");
       const modalCvBtn = document.getElementById("modalCvPdfBtn");
       const modalBadge = document.getElementById("modalPdfVersionBadge");
+      const prevCvBtn = document.getElementById("previewActiveCvBtn");
+      const prevProfBtn = document.getElementById("previewActiveProfileBtn");
 
       if (heroProfLink) heroProfLink.href = activeProfUrl;
       if (heroCvLink) heroCvLink.href = activeCvUrl;
       if (modalProfBtn) modalProfBtn.href = activeProfUrl;
       if (modalCvBtn) modalCvBtn.href = activeCvUrl;
+      if (prevCvBtn) prevCvBtn.href = activeCvUrl;
+      if (prevProfBtn) prevProfBtn.href = activeProfUrl;
 
-      if (!siteData.cvStudio.isDefaultPdf) {
-        if (heroProfLink) heroProfLink.setAttribute("download", "Prof_Tariq_Mansoor_Updated_Profile.pdf");
-        if (heroCvLink) heroCvLink.setAttribute("download", "Prof_Tariq_Mansoor_Updated_CV.pdf");
-        if (modalProfBtn) modalProfBtn.setAttribute("download", "Prof_Tariq_Mansoor_Updated_Profile.pdf");
-        if (modalCvBtn) modalCvBtn.setAttribute("download", "Prof_Tariq_Mansoor_Updated_CV.pdf");
-        if (modalBadge) modalBadge.textContent = "Active Version: Updated via Control Panel (" + (siteData.cvStudio.template || "Custom") + ")";
+      const isDefaultCv = !siteData.cv.uploadedFilename || siteData.cv.uploadedFilename.includes("Default");
+      const isDefaultProf = !siteData.profile.uploadedFilename || siteData.profile.uploadedFilename.includes("Default");
+
+      if (!isDefaultProf || !isDefaultCv) {
+        if (heroProfLink) heroProfLink.setAttribute("download", "Prof_Tariq_Mansoor_Profile.pdf");
+        if (heroCvLink) heroCvLink.setAttribute("download", "Prof_Tariq_Mansoor_CV.pdf");
+        if (modalProfBtn) modalProfBtn.setAttribute("download", "Prof_Tariq_Mansoor_Profile.pdf");
+        if (modalCvBtn) modalCvBtn.setAttribute("download", "Prof_Tariq_Mansoor_CV.pdf");
+        if (modalBadge) modalBadge.textContent = "Active Version: Verified Custom Dossier";
       } else {
         if (heroProfLink) heroProfLink.removeAttribute("download");
         if (heroCvLink) heroCvLink.removeAttribute("download");
@@ -3410,7 +3408,7 @@ volumes:
       if (socialGrid) {
         const updates = siteData.socialUpdates || DEFAULT_SITE_DATA.socialUpdates;
         socialGrid.innerHTML = updates.map(up => `
-          <article class="glass-card rounded-2xl p-6 flex flex-col justify-between gap-4 reveal-item reveal-fade-up">
+          <article class="glass-card rounded-2xl p-6 flex flex-col justify-between gap-4 reveal-item is-visible reveal-fade-up">
             <div class="space-y-2.5">
               <div class="flex items-center justify-between gap-2 text-xs">
                 <span class="px-2.5 py-0.5 rounded-full bg-amber-500/20 text-amber-300 font-bold">${escapeHtml(up.badge)}</span>
@@ -3805,7 +3803,7 @@ volumes:
         : siteData.experience.filter(item => item.category === activeExpFilter);
 
       container.innerHTML = filtered.map(item => `
-        <div class="relative group reveal-item reveal-fade-up">
+        <div class="relative group reveal-item is-visible reveal-fade-up">
           <div class="absolute -left-[31px] sm:-left-[39px] top-1.5 w-4 h-4 rounded-full border-2 border-amber-400 bg-slate-950 group-hover:scale-125 transition"></div>
           <div class="glass-card rounded-2xl p-5 sm:p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <div class="space-y-1">
@@ -3830,7 +3828,7 @@ volumes:
       initScrollAnimations();
     }
 
-    // Viewport Scroll Reveal Engine (IntersectionObserver + GSAP Smooth Enhancement)
+    // Viewport Scroll Reveal Engine (IntersectionObserver + Smooth Enhancement)
     let revealObserver = null;
     function initScrollAnimations() {
       const items = document.querySelectorAll(".reveal-item");
@@ -3847,13 +3845,22 @@ volumes:
             entry.target.classList.add("is-visible");
           }
         });
-      }, { threshold: 0.12, rootMargin: "0px 0px -40px 0px" });
+      }, { threshold: 0.05, rootMargin: "0px 0px -20px 0px" });
 
-      items.forEach(el => revealObserver.observe(el));
+      items.forEach(el => {
+        if (isAdminAuthenticated || el.classList.contains("is-visible")) {
+          el.classList.add("is-visible");
+        } else {
+          revealObserver.observe(el);
+        }
+      });
     }
 
     // Animated Counters on Viewport Entry
+    let counterTimers = [];
     function animateCounters() {
+      counterTimers.forEach(t => clearInterval(t));
+      counterTimers = [];
       const counters = document.querySelectorAll(".stat-counter");
       counters.forEach(counter => {
         const target = parseInt(counter.getAttribute("data-target") || "0", 10);
@@ -3868,22 +3875,49 @@ volumes:
             counter.textContent = String(current);
           }
         }, 28);
+        counterTimers.push(timer);
       });
     }
 
     // Populate CMS Control Panel Inputs & Lists
     function populateCmsInputs() {
+      if (!siteData.cv) siteData.cv = JSON.parse(JSON.stringify(DEFAULT_SITE_DATA.cv));
+      if (!siteData.profile) siteData.profile = JSON.parse(JSON.stringify(DEFAULT_SITE_DATA.profile));
       if (!siteData.cvStudio) siteData.cvStudio = JSON.parse(JSON.stringify(DEFAULT_SITE_DATA.cvStudio));
-      document.getElementById("cvKeepDefaultSettingsCheck").checked = !!siteData.cvStudio.keepDefaultSettings;
-      document.getElementById("cvFontFamily").value = siteData.cvStudio.fontFamily || "'Times New Roman', Times, serif";
-      document.getElementById("cvFontSize").value = siteData.cvStudio.fontSize || "11pt";
-      document.getElementById("cvLineSpacing").value = siteData.cvStudio.lineSpacing || "1.35";
-      document.getElementById("cvParaSpacing").value = siteData.cvStudio.paraSpacing || "12px";
-      document.getElementById("cvPageMargin").value = siteData.cvStudio.pageMargin || "20mm";
-      document.getElementById("cvDocHeaderTitle").value = siteData.cvStudio.headerTitle || "";
-      document.getElementById("cvDocSubtitle").value = siteData.cvStudio.subtitle || "";
-      document.getElementById("cvDocBodyText").value = siteData.cvStudio.bodyText || "";
-      document.getElementById("uploadedPdfFilename").textContent = "Currently using: " + (siteData.cvStudio.uploadedFilename || "Official Default PDF (As-Is)");
+
+      // 1. Populate CV Management Inputs
+      const cvUrlInput = document.getElementById("cmsCvPdfUrl");
+      if (cvUrlInput) cvUrlInput.value = siteData.cv.activePdfUrl || OFFICIAL_EXISTING_PDF_URL;
+      const cvBadge = document.getElementById("cvActiveFilenameBadge");
+      if (cvBadge) cvBadge.textContent = "Currently using: " + (siteData.cv.uploadedFilename || "Official Academic CV (Default)");
+      const cvTitleInput = document.getElementById("cvAcademicTitle");
+      if (cvTitleInput) cvTitleInput.value = siteData.cv.academicTitle || "";
+      const cvSpecInput = document.getElementById("cvSpecialization");
+      if (cvSpecInput) cvSpecInput.value = siteData.cv.specialization || "";
+      const cvExpInput = document.getElementById("cvTeachingExp");
+      if (cvExpInput) cvExpInput.value = siteData.cv.teachingExp || "";
+      const cvStatInput = document.getElementById("cvResearchStat");
+      if (cvStatInput) cvStatInput.value = siteData.cv.researchStat || "";
+      const cvSummInput = document.getElementById("cvAcademicSummary");
+      if (cvSummInput) cvSummInput.value = siteData.cv.academicSummary || "";
+      const prevCvBtn = document.getElementById("previewActiveCvBtn");
+      if (prevCvBtn) prevCvBtn.href = siteData.cv.activePdfUrl || OFFICIAL_EXISTING_PDF_URL;
+
+      // 2. Populate Executive Profile Management Inputs
+      const profUrlInput = document.getElementById("cmsProfilePdfUrl");
+      if (profUrlInput) profUrlInput.value = siteData.profile.activePdfUrl || siteData.hero.profilePdfUrl || OFFICIAL_EXISTING_PDF_URL;
+      const profBadge = document.getElementById("profileActiveFilenameBadge");
+      if (profBadge) profBadge.textContent = "Currently using: " + (siteData.profile.uploadedFilename || "Official Executive Profile (Default)");
+      const prevProfBtn = document.getElementById("previewActiveProfileBtn");
+      if (prevProfBtn) prevProfBtn.href = siteData.profile.activePdfUrl || siteData.hero.profilePdfUrl || OFFICIAL_EXISTING_PDF_URL;
+
+      const docHeaderTitle = document.getElementById("cvDocHeaderTitle");
+      if (docHeaderTitle) docHeaderTitle.value = siteData.profile.headerTitle || siteData.cvStudio.headerTitle || "";
+      const docSubtitle = document.getElementById("cvDocSubtitle");
+      if (docSubtitle) docSubtitle.value = siteData.profile.subtitle || siteData.cvStudio.subtitle || "";
+      const docBody = document.getElementById("cvDocBodyText");
+      if (docBody) docBody.value = siteData.profile.bodyText || siteData.cvStudio.bodyText || "";
+
       renderCvPreviewSheet();
 
       document.getElementById("cmsHeroTitle").value = siteData.hero.title;
@@ -4022,9 +4056,10 @@ volumes:
 
       document.querySelectorAll(".cms-tab-btn").forEach(btn => {
         const isCurrent = btn.getAttribute("data-cms-tab") === tabName;
-        btn.className = isCurrent
-          ? "cms-tab-btn w-full text-left px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold flex items-center justify-between bg-amber-500/20 text-amber-300 border border-amber-400/30"
-          : "cms-tab-btn w-full text-left px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold flex items-center justify-between hover:bg-white/5 text-slate-200";
+        btn.classList.toggle("bg-amber-500/20", isCurrent);
+        btn.classList.toggle("text-amber-300", isCurrent);
+        btn.classList.toggle("border-amber-400/30", isCurrent);
+        btn.classList.toggle("border-transparent", !isCurrent);
       });
     }
 
@@ -4233,6 +4268,11 @@ volumes:
 
         function animateThree() {
           requestAnimationFrame(animateThree);
+          const cmsModal = document.getElementById("cmsModal");
+          const loginModal = document.getElementById("adminLoginModal");
+          if ((cmsModal && !cmsModal.classList.contains("hidden")) || (loginModal && !loginModal.classList.contains("hidden"))) {
+            return;
+          }
           if (siteData.enableThreeJs === false) return;
           particles.rotation.y += 0.0009;
           particles.rotation.x += 0.0004;
@@ -4473,26 +4513,48 @@ volumes:
       initThreeJsBackground();
 
       // Check if accessed via /admin route (https://tariqmansoor.com/admin or https://test.tariqmansoor.com/admin or #admin)
-      syncAdminUiMode();
-      syncStateFromServerIfAvailable();
+      async function bootAdminRouteSequence() {
+        syncAdminUiMode();
+        await syncStateFromServerIfAvailable();
 
-      const existingPass = sessionStorage.getItem("tm_admin_pass");
-      if (existingPass && window.__PORTAINER_API__ && window.__PORTAINER_API__.verifyAdmin) {
-        window.__PORTAINER_API__.verifyAdmin(existingPass).then(ok => {
+        const existingPass = sessionStorage.getItem("tm_admin_pass");
+        if (existingPass) {
+          let ok = false;
+          if (window.__PORTAINER_API__ && window.__PORTAINER_API__.verifyAdmin) {
+            try {
+              ok = await window.__PORTAINER_API__.verifyAdmin(existingPass);
+            } catch (e) {
+              ok = false;
+            }
+          } else {
+            const expected = (window.__PORTAINER_ENV__ && window.__PORTAINER_ENV__.ADMIN_PASSWORD) || "TariqMansoor@2026";
+            ok = (existingPass === expected);
+          }
           if (ok) {
             isAdminAuthenticated = true;
             syncAdminUiMode();
           }
-        });
-      }
+        }
 
-      const pathIsAdmin = window.location.pathname.replace(/\/+$/, "").endsWith("/admin") ||
-                          window.location.hash === "#admin" ||
-                          window.location.search.includes("admin=1") ||
-                          (window.__PORTAINER_ENV__ && window.__PORTAINER_ENV__.IS_ADMIN_ROUTE === true);
-      if (pathIsAdmin) {
-        requestOpenCms("hero");
+        const pathIsAdmin = window.location.pathname.replace(/\/+$/, "").endsWith("/admin") ||
+                            window.location.hash === "#admin" ||
+                            window.location.search.includes("admin=1") ||
+                            (window.__PORTAINER_ENV__ && window.__PORTAINER_ENV__.IS_ADMIN_ROUTE === true);
+        if (pathIsAdmin) {
+          if (isAdminAuthenticated) {
+            openCmsModal("hero");
+          } else {
+            const lModal = document.getElementById("adminLoginModal");
+            if (lModal) {
+              lModal.classList.remove("hidden");
+              lModal.classList.add("flex");
+              const passField = document.getElementById("adminPassField");
+              if (passField) passField.focus();
+            }
+          }
+        }
       }
+      bootAdminRouteSequence();
 
       const simPubBtn = document.getElementById("simPublicRouteBtn");
       if (simPubBtn) {
@@ -4650,15 +4712,17 @@ volumes:
 
         const cvTplBtn = e.target.closest("[data-cv-template]");
         if (cvTplBtn) {
-          siteData.cvStudio.template = cvTplBtn.getAttribute("data-cv-template");
+          const tpl = cvTplBtn.getAttribute("data-cv-template");
+          siteData.cvStudio.template = tpl;
+          if (siteData.profile) siteData.profile.template = tpl;
           document.querySelectorAll(".cv-tpl-btn").forEach(b => {
-            const active = b.getAttribute("data-cv-template") === siteData.cvStudio.template;
+            const active = b.getAttribute("data-cv-template") === tpl;
             b.className = active
-              ? "cv-tpl-btn p-3.5 rounded-xl border border-amber-400 bg-amber-500/20 text-left"
-              : "cv-tpl-btn p-3.5 rounded-xl border border-white/15 bg-black/40 text-left";
+              ? "cv-tpl-btn p-3.5 rounded-xl border border-sky-400 bg-sky-500/20 text-left transition"
+              : "cv-tpl-btn p-3.5 rounded-xl border border-white/15 bg-black/40 text-left transition";
           });
           renderCvPreviewSheet();
-          showToast("Selected CV/Profile Design: " + siteData.cvStudio.template);
+          showToast("Selected Document Design: " + tpl);
         }
 
         const dlCvRail = e.target.closest("[data-action='download-cv']");
@@ -4684,32 +4748,156 @@ volumes:
         showToast("All changes published live to website!");
       });
 
-      // CV & Profile Typography & Page Controls Live Change
+      // Executive Profile Typography & Dossier Text Live Change
       ["cvKeepDefaultSettingsCheck", "cvFontFamily", "cvFontSize", "cvLineSpacing", "cvParaSpacing", "cvPageMargin", "cvDocHeaderTitle", "cvDocSubtitle", "cvDocBodyText"].forEach(id => {
         const el = document.getElementById(id);
         if (!el) return;
         el.addEventListener("input", () => {
-          siteData.cvStudio.keepDefaultSettings = document.getElementById("cvKeepDefaultSettingsCheck").checked;
-          siteData.cvStudio.fontFamily = document.getElementById("cvFontFamily").value;
-          siteData.cvStudio.fontSize = document.getElementById("cvFontSize").value;
-          siteData.cvStudio.lineSpacing = document.getElementById("cvLineSpacing").value;
-          siteData.cvStudio.paraSpacing = document.getElementById("cvParaSpacing").value;
-          siteData.cvStudio.pageMargin = document.getElementById("cvPageMargin").value;
-          siteData.cvStudio.headerTitle = document.getElementById("cvDocHeaderTitle").value;
-          siteData.cvStudio.subtitle = document.getElementById("cvDocSubtitle").value;
-          siteData.cvStudio.bodyText = document.getElementById("cvDocBodyText").value;
+          const keepChk = document.getElementById("cvKeepDefaultSettingsCheck");
+          if (keepChk) siteData.cvStudio.keepDefaultSettings = keepChk.checked;
+          const ff = document.getElementById("cvFontFamily");
+          if (ff) siteData.cvStudio.fontFamily = ff.value;
+          const fs = document.getElementById("cvFontSize");
+          if (fs) siteData.cvStudio.fontSize = fs.value;
+          const ls = document.getElementById("cvLineSpacing");
+          if (ls) siteData.cvStudio.lineSpacing = ls.value;
+          const ps = document.getElementById("cvParaSpacing");
+          if (ps) siteData.cvStudio.paraSpacing = ps.value;
+          const pm = document.getElementById("cvPageMargin");
+          if (pm) siteData.cvStudio.pageMargin = pm.value;
+          const ht = document.getElementById("cvDocHeaderTitle");
+          if (ht) {
+            siteData.cvStudio.headerTitle = ht.value;
+            if (siteData.profile) siteData.profile.headerTitle = ht.value;
+          }
+          const st = document.getElementById("cvDocSubtitle");
+          if (st) {
+            siteData.cvStudio.subtitle = st.value;
+            if (siteData.profile) siteData.profile.subtitle = st.value;
+          }
+          const bt = document.getElementById("cvDocBodyText");
+          if (bt) {
+            siteData.cvStudio.bodyText = bt.value;
+            if (siteData.profile) siteData.profile.bodyText = bt.value;
+          }
           renderCvPreviewSheet();
         });
       });
 
-      // Restore Existing Default PDF & Settings As-Is
-      document.getElementById("restoreDefaultCvPdfBtn").addEventListener("click", () => {
-        siteData.cvStudio = JSON.parse(JSON.stringify(DEFAULT_SITE_DATA.cvStudio));
-        saveState();
-        populateCmsInputs();
-        renderSite();
-        showToast("Restored Original Official PDF & Default Page Settings As-Is!");
-      });
+      // =====================================================================
+      // DEDICATED CV & EXECUTIVE PROFILE HANDLERS
+      // =====================================================================
+
+      // 1. Curriculum Vitae (CV) Handlers
+      const saveCvUrlBtn = document.getElementById("saveCvUrlBtn");
+      if (saveCvUrlBtn) {
+        saveCvUrlBtn.addEventListener("click", () => {
+          const url = (document.getElementById("cmsCvPdfUrl")?.value || "").trim();
+          if (!url) return;
+          if (!siteData.cv) siteData.cv = JSON.parse(JSON.stringify(DEFAULT_SITE_DATA.cv));
+          siteData.cv.activePdfUrl = url;
+          siteData.cv.uploadedFilename = "Custom Link: " + (url.split("/").pop() || "CV.pdf");
+          saveState();
+          populateCmsInputs();
+          renderSite();
+          showToast("Official CV PDF link updated successfully!");
+        });
+      }
+
+      const uploadCvInput = document.getElementById("uploadCvPdfInput");
+      if (uploadCvInput) {
+        uploadCvInput.addEventListener("change", (e) => {
+          const file = e.target.files && e.target.files[0];
+          if (!file) return;
+          const reader = new FileReader();
+          reader.onload = () => {
+            if (!siteData.cv) siteData.cv = JSON.parse(JSON.stringify(DEFAULT_SITE_DATA.cv));
+            siteData.cv.activePdfUrl = reader.result;
+            siteData.cv.uploadedFilename = file.name;
+            saveState();
+            populateCmsInputs();
+            renderSite();
+            showToast("Uploaded custom Curriculum Vitae (" + file.name + ")!");
+          };
+          reader.readAsDataURL(file);
+        });
+      }
+
+      const resCvBtn = document.getElementById("restoreDefaultCvBtn");
+      if (resCvBtn) {
+        resCvBtn.addEventListener("click", () => {
+          siteData.cv = JSON.parse(JSON.stringify(DEFAULT_SITE_DATA.cv));
+          saveState();
+          populateCmsInputs();
+          renderSite();
+          showToast("Restored original Academic Curriculum Vitae (CV)!");
+        });
+      }
+
+      const saveCvDetailsBtn = document.getElementById("saveCvDetailsBtn");
+      if (saveCvDetailsBtn) {
+        saveCvDetailsBtn.addEventListener("click", () => {
+          if (!siteData.cv) siteData.cv = JSON.parse(JSON.stringify(DEFAULT_SITE_DATA.cv));
+          siteData.cv.academicTitle = (document.getElementById("cvAcademicTitle")?.value || "").trim();
+          siteData.cv.specialization = (document.getElementById("cvSpecialization")?.value || "").trim();
+          siteData.cv.teachingExp = (document.getElementById("cvTeachingExp")?.value || "").trim();
+          siteData.cv.researchStat = (document.getElementById("cvResearchStat")?.value || "").trim();
+          siteData.cv.academicSummary = (document.getElementById("cvAcademicSummary")?.value || "").trim();
+          saveState();
+          populateCmsInputs();
+          renderSite();
+          showToast("Academic & Surgical CV details saved!");
+        });
+      }
+
+      // 2. Executive Profile Handlers
+      const saveProfUrlBtn = document.getElementById("saveProfileUrlBtn");
+      if (saveProfUrlBtn) {
+        saveProfUrlBtn.addEventListener("click", () => {
+          const url = (document.getElementById("cmsProfilePdfUrl")?.value || "").trim();
+          if (!url) return;
+          if (!siteData.profile) siteData.profile = JSON.parse(JSON.stringify(DEFAULT_SITE_DATA.profile));
+          siteData.profile.activePdfUrl = url;
+          siteData.hero.profilePdfUrl = url;
+          siteData.profile.uploadedFilename = "Custom Link: " + (url.split("/").pop() || "Profile.pdf");
+          saveState();
+          populateCmsInputs();
+          renderSite();
+          showToast("Official Executive Profile PDF link updated successfully!");
+        });
+      }
+
+      const uploadProfInput = document.getElementById("uploadProfilePdfInput");
+      if (uploadProfInput) {
+        uploadProfInput.addEventListener("change", (e) => {
+          const file = e.target.files && e.target.files[0];
+          if (!file) return;
+          const reader = new FileReader();
+          reader.onload = () => {
+            if (!siteData.profile) siteData.profile = JSON.parse(JSON.stringify(DEFAULT_SITE_DATA.profile));
+            siteData.profile.activePdfUrl = reader.result;
+            siteData.profile.uploadedFilename = file.name;
+            siteData.hero.profilePdfUrl = reader.result;
+            saveState();
+            populateCmsInputs();
+            renderSite();
+            showToast("Uploaded custom Executive Profile (" + file.name + ")!");
+          };
+          reader.readAsDataURL(file);
+        });
+      }
+
+      const resProfBtn = document.getElementById("restoreDefaultProfileBtn");
+      if (resProfBtn) {
+        resProfBtn.addEventListener("click", () => {
+          siteData.profile = JSON.parse(JSON.stringify(DEFAULT_SITE_DATA.profile));
+          siteData.hero.profilePdfUrl = DEFAULT_SITE_DATA.profile.activePdfUrl;
+          saveState();
+          populateCmsInputs();
+          renderSite();
+          showToast("Restored original Executive Profile!");
+        });
+      }
 
       // Helper to generate PDF Data URI from #cvLivePreviewSheet using html2pdf.js
       async function generatePdfFromStudio(triggerDownloadFile) {
@@ -4718,7 +4906,7 @@ volumes:
         if (window.html2pdf) {
           const opt = {
             margin: 0,
-            filename: "Prof_Tariq_Mansoor_CV_Profile.pdf",
+            filename: "Prof_Tariq_Mansoor_Executive_Profile.pdf",
             image: { type: "jpeg", quality: 0.98 },
             html2canvas: { scale: 2, useCORS: true },
             jsPDF: { unit: "mm", format: "a4", orientation: "portrait" }
@@ -4732,88 +4920,37 @@ volumes:
         return null;
       }
 
-      // Apply CV & Profile Update according to 3-Way Scope (pdf-only | website-only | both)
-      document.getElementById("applyCvStudioChangesBtn").addEventListener("click", async () => {
-        const scopeRadio = document.querySelector("input[name='cvUpdateScope']:checked");
-        const scope = scopeRadio ? scopeRadio.value : "pdf-only";
-        siteData.cvStudio.updateScope = scope;
-
-        const paras = String(siteData.cvStudio.bodyText || "").split(/\n\s*\n/).map(p => p.trim()).filter(Boolean);
-
-        if (scope === "website-only" || scope === "both") {
-          if (paras.length > 0) {
-            siteData.about.paragraphs = paras;
-            siteData.hero.summary = paras[0];
-          }
-          siteData.publishStatus = "draft";
-        }
-
-        if (scope === "pdf-only" || scope === "both") {
-          showToast("Generating updated PDF from selected template...");
+      // Apply Executive Profile Update
+      const applyCvBtn = document.getElementById("applyCvStudioChangesBtn");
+      if (applyCvBtn) {
+        applyCvBtn.addEventListener("click", async () => {
+          if (!siteData.profile) siteData.profile = JSON.parse(JSON.stringify(DEFAULT_SITE_DATA.profile));
+          siteData.profile.headerTitle = (document.getElementById("cvDocHeaderTitle")?.value || "").trim();
+          siteData.profile.subtitle = (document.getElementById("cvDocSubtitle")?.value || "").trim();
+          siteData.profile.bodyText = (document.getElementById("cvDocBodyText")?.value || "").trim();
+          
+          showToast("Generating updated Executive Profile PDF...");
           const pdfUri = await generatePdfFromStudio(false);
           if (pdfUri) {
-            siteData.cvStudio.activePdfUrl = pdfUri;
-            siteData.cvStudio.activeCvUrl = pdfUri;
+            siteData.profile.activePdfUrl = pdfUri;
+            siteData.hero.profilePdfUrl = pdfUri;
+            siteData.profile.uploadedFilename = "Generated Profile (" + (siteData.profile.template || "Dossier") + ")";
           }
-          siteData.cvStudio.isDefaultPdf = false;
-          siteData.cvStudio.uploadedFilename = "Generated (" + siteData.cvStudio.template + ")";
-        }
-
-        saveState();
-        populateCmsInputs();
-        renderSite();
-
-        if (scope === "pdf-only") {
-          showToast("Updated CV & Profile PDF! Website content kept untouched.");
-        } else if (scope === "website-only") {
-          showToast("Updated Website Draft! Click 'Publish to Website' to push live (PDF kept as default).");
-        } else {
-          showToast("Updated both Website & Active CV/Profile PDF!");
-        }
-      });
-
-      // Download Styled PDF File directly for inspection/upload
-      document.getElementById("downloadStyledCvPdfBtn").addEventListener("click", async () => {
-        showToast("Preparing styled PDF download...");
-        await generatePdfFromStudio(true);
-      });
-
-      // Upload Custom PDF File
-      document.getElementById("uploadCustomPdfInput").addEventListener("change", (e) => {
-        const file = e.target.files && e.target.files[0];
-        if (!file) return;
-        const reader = new FileReader();
-        reader.onload = () => {
-          siteData.cvStudio.activePdfUrl = reader.result;
-          siteData.cvStudio.activeCvUrl = reader.result;
-          siteData.cvStudio.isDefaultPdf = false;
-          siteData.cvStudio.uploadedFilename = file.name;
           saveState();
           populateCmsInputs();
           renderSite();
-          showToast("Uploaded custom PDF (" + file.name + ") as active download!");
-        };
-        reader.readAsDataURL(file);
-      });
+          showToast("Updated Executive Profile & active PDF dossier!");
+        });
+      }
 
-      // Portainer Admin Password & Copy Compose Handlers
-      document.getElementById("saveAdminPassBtn").addEventListener("click", () => {
-        const newPass = document.getElementById("cmsAdminPassInput").value.trim();
-        if (!newPass) return;
-        window.__PORTAINER_ENV__.ADMIN_PASSWORD = newPass;
-        showToast("Runtime ADMIN_PASSWORD updated for this session!");
-      });
-
-      document.getElementById("copyDockerComposeBtn").addEventListener("click", () => {
-        const text = document.getElementById("dockerComposeCodeBlock").textContent;
-        const ta = document.createElement("textarea");
-        ta.value = text;
-        document.body.appendChild(ta);
-        ta.select();
-        document.execCommand("copy");
-        ta.remove();
-        showToast("Copied Portainer docker-compose.yml to clipboard!");
-      });
+      // Download Styled PDF File directly
+      const dlStyledBtn = document.getElementById("downloadStyledCvPdfBtn");
+      if (dlStyledBtn) {
+        dlStyledBtn.addEventListener("click", async () => {
+          showToast("Preparing styled PDF download...");
+          await generatePdfFromStudio(true);
+        });
+      }
 
       // Save Hero & Images in CMS
       document.getElementById("saveHeroCmsBtn").addEventListener("click", () => {
@@ -4823,7 +4960,11 @@ volumes:
         siteData.hero.roles = document.getElementById("cmsHeroRoles").value.split("\n").map(s => s.trim()).filter(Boolean);
         siteData.hero.heroImage = document.getElementById("cmsHeroImgUrl").value.trim();
         siteData.hero.aboutImage = document.getElementById("cmsAboutImgUrl").value.trim();
-        siteData.hero.profilePdfUrl = document.getElementById("cmsProfilePdfUrl").value.trim();
+        const profPdfField = document.getElementById("cmsProfilePdfUrl");
+        if (profPdfField && profPdfField.value.trim()) {
+          siteData.hero.profilePdfUrl = profPdfField.value.trim();
+          if (siteData.profile) siteData.profile.activePdfUrl = profPdfField.value.trim();
+        }
         saveState();
         renderSite();
         showToast("Hero & Media settings updated live!");
