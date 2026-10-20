@@ -124,30 +124,56 @@
 
     /* Viewport Scroll Reveal Animation System */
     .reveal-item {
-      opacity: 1;
+      opacity: 0;
       will-change: transform, opacity;
-      transition: opacity var(--anim-duration) cubic-bezier(0.16, 1, 0.3, 1),
-                  transform var(--anim-duration) cubic-bezier(0.16, 1, 0.3, 1);
+      transition: opacity var(--anim-duration, 0.75s) cubic-bezier(0.16, 1, 0.3, 1),
+                  transform var(--anim-duration, 0.75s) cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     .reveal-fade-up {
-      transform: translateY(0);
+      transform: translateY(32px);
+    }
+
+    .reveal-fade-down {
+      transform: translateY(-32px);
     }
 
     .reveal-fade-left {
-      transform: translateX(0);
+      transform: translateX(-36px);
     }
 
     .reveal-fade-right {
-      transform: translateX(0);
+      transform: translateX(36px);
     }
 
     .reveal-zoom-in {
-      transform: scale(1);
+      transform: scale(0.92);
     }
 
-    body.admin-mode-active .reveal-item,
+    /* Stagger Delays for Elegant Cascading Entry */
+    .stagger-1 { transition-delay: 70ms; }
+    .stagger-2 { transition-delay: 140ms; }
+    .stagger-3 { transition-delay: 210ms; }
+    .stagger-4 { transition-delay: 280ms; }
+    .stagger-5 { transition-delay: 350ms; }
+    .stagger-6 { transition-delay: 420ms; }
+
+    /* When Element Enters Viewport */
     .reveal-item.is-visible {
+      opacity: 1 !important;
+      transform: translateY(0) translateX(0) scale(1) !important;
+    }
+
+    /* Reduced Motion Accessibility */
+    @media (prefers-reduced-motion: reduce) {
+      .reveal-item {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+      }
+    }
+
+    body.admin-mode-active .reveal-item {
       opacity: 1 !important;
       transform: none !important;
     }
@@ -214,49 +240,51 @@
       opacity: 0.18 !important;
     }
 
-    /* Light Mode Navigation Bar */
+    /* Executive Statesman Topbar (Preserves commanding dark obsidian glass across Light & Dark mode) */
     body.mode-light #mainHeader {
-      background: rgba(255, 255, 255, 0.94) !important;
-      border-bottom: 1px solid rgba(15, 23, 42, 0.08) !important;
-      color: #0f172a !important;
-      box-shadow: 0 4px 20px rgba(15, 23, 42, 0.05) !important;
+      background: rgba(7, 11, 20, 0.94) !important;
+      backdrop-filter: blur(24px) !important;
+      -webkit-backdrop-filter: blur(24px) !important;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12) !important;
+      color: #f8fafc !important;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35) !important;
     }
     body.mode-light #mainHeader #navBrandName {
-      color: #0f172a !important;
+      color: #ffffff !important;
     }
     body.mode-light #mainHeader #navBrandSub {
-      color: #475569 !important;
+      color: #cbd5e1 !important;
     }
     body.mode-light #mainHeader .nav-item {
-      color: #334155 !important;
+      color: #e2e8f0 !important;
     }
     body.mode-light #mainHeader .nav-item:hover {
-      background: rgba(15, 23, 42, 0.06) !important;
-      color: #0f172a !important;
+      background: rgba(255, 255, 255, 0.1) !important;
+      color: #ffffff !important;
     }
     body.mode-light #mainHeader .nav-link-active {
-      border-color: #d97706 !important;
-      color: #b45309 !important;
-      background: rgba(245, 158, 11, 0.1) !important;
+      border-color: #f59e0b !important;
+      color: #fbbf24 !important;
+      background: rgba(245, 158, 11, 0.18) !important;
     }
     body.mode-light #mainHeader .glass-panel {
-      background: rgba(15, 23, 42, 0.05) !important;
-      border: 1px solid rgba(15, 23, 42, 0.12) !important;
-      color: #0f172a !important;
-      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04) !important;
+      background: rgba(255, 255, 255, 0.08) !important;
+      border: 1px solid rgba(255, 255, 255, 0.16) !important;
+      color: #ffffff !important;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2) !important;
     }
     body.mode-light #mainHeader .glass-panel:hover {
-      background: rgba(15, 23, 42, 0.09) !important;
-      border-color: rgba(15, 23, 42, 0.22) !important;
+      background: rgba(255, 255, 255, 0.15) !important;
+      border-color: rgba(245, 158, 11, 0.5) !important;
     }
     body.mode-light #mainHeader .glass-panel span {
-      color: #0f172a !important;
+      color: #ffffff !important;
     }
     body.mode-light #mainHeader .glass-panel i {
-      color: #0f172a !important;
+      color: #f8fafc !important;
     }
     body.mode-light #mainHeader .glass-panel i[class*="text-amber"] {
-      color: #d97706 !important;
+      color: #fbbf24 !important;
     }
 
     /* Light Mode Cards & Content Typography */
@@ -1823,7 +1851,7 @@
 
           <div class="space-y-4">
             <!-- Phone Card -->
-            <div class="glass-card rounded-2xl p-5 flex items-start gap-4">
+            <div class="glass-card rounded-2xl p-5 flex items-start gap-4 reveal-item reveal-fade-left stagger-1">
               <div class="w-11 h-11 rounded-xl bg-amber-500/15 border border-amber-400/30 flex items-center justify-center shrink-0 text-amber-400">
                 <i data-lucide="phone" class="w-5 h-5"></i>
               </div>
@@ -1835,7 +1863,7 @@
             </div>
 
             <!-- Email Card -->
-            <div class="glass-card rounded-2xl p-5 flex items-start gap-4">
+            <div class="glass-card rounded-2xl p-5 flex items-start gap-4 reveal-item reveal-fade-left stagger-2">
               <div class="w-11 h-11 rounded-xl bg-amber-500/15 border border-amber-400/30 flex items-center justify-center shrink-0 text-amber-400">
                 <i data-lucide="mail" class="w-5 h-5"></i>
               </div>
@@ -1847,7 +1875,7 @@
             </div>
 
             <!-- Address Card -->
-            <div class="glass-card rounded-2xl p-5 flex items-start gap-4">
+            <div class="glass-card rounded-2xl p-5 flex items-start gap-4 reveal-item reveal-fade-left stagger-3">
               <div class="w-11 h-11 rounded-xl bg-amber-500/15 border border-amber-400/30 flex items-center justify-center shrink-0 text-amber-400">
                 <i data-lucide="map-pin" class="w-5 h-5"></i>
               </div>
@@ -1861,7 +1889,7 @@
 
         <!-- Right Interactive Send Message Form -->
         <div class="lg:col-span-7 reveal-item reveal-fade-right">
-          <div class="glass-panel rounded-3xl p-6 sm:p-8 lg:p-10">
+          <div class="glass-panel rounded-3xl p-6 sm:p-8 lg:p-10 reveal-item reveal-zoom-in stagger-2">
             <h3 class="font-serif-display text-2xl font-bold mb-2">Send a Direct Message</h3>
             <p class="text-xs sm:text-sm opacity-75 mb-6">
               Messages submitted below are saved directly into the Control Panel's <strong>Messages Inbox</strong> for immediate review and response.
@@ -1954,7 +1982,10 @@
 
       <div class="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs opacity-70">
         <p id="footerCopyright">Copyright © 2026 | www.tariqmansoor.com — All Rights Reserved.</p>
-        <p>Engineered with Glassmorphism UI, IntersectionObserver + GSAP Scroll Animations &amp; Live CMS Control Panel</p>
+        <div class="text-center sm:text-right space-y-1">
+          <p>Engineered with Glassmorphism UI, IntersectionObserver + GSAP Scroll Animations &amp; Live CMS Control Panel</p>
+          <p class="text-[11px] opacity-85">Developer: <a href="mailto:kunwarzafar@gmail.com" class="text-amber-400 hover:text-amber-300 underline font-semibold transition">kunwarzafar@gmail.com</a></p>
+        </div>
       </div>
     </div>
   </footer>
@@ -3467,7 +3498,7 @@
       if (dlBtn) {
         dlBtn.setAttribute("title", mode === "light" ? "Switch to Dark Mode" : "Switch to Light Mode");
         dlBtn.innerHTML = mode === "light"
-          ? '<i data-lucide="moon" class="w-4 h-4 text-slate-800"></i>'
+          ? '<i data-lucide="moon" class="w-4 h-4 text-amber-300"></i>'
           : '<i data-lucide="sun" class="w-4 h-4 text-amber-400"></i>';
       }
       if (window.lucide) {
@@ -3537,8 +3568,8 @@
       // Held Positions Grid (With Cover Image Provision on Every Card)
       const showImgs = siteData.showCardImages !== false;
       const posGrid = document.getElementById("positionsGrid");
-      posGrid.innerHTML = siteData.positions.map(pos => `
-        <article class="glass-card rounded-3xl overflow-hidden flex flex-col justify-between reveal-item is-visible reveal-fade-up">
+      posGrid.innerHTML = siteData.positions.map((pos, idx) => `
+        <article class="glass-card rounded-3xl overflow-hidden flex flex-col justify-between reveal-item reveal-fade-up stagger-${(idx % 3) + 1}">
           <div>
             ${showImgs && pos.image ? `
               <div class="h-48 w-full overflow-hidden bg-slate-900 relative border-b border-white/10">
@@ -3567,10 +3598,10 @@
         </article>
       `).join("");
 
-      // AMU Legacy Pillars
+      // AMU Legacy Pillars (With Staggered Scroll Animations)
       const legacyGrid = document.getElementById("legacyPillarsGrid");
-      legacyGrid.innerHTML = siteData.legacyPillars.map(pil => `
-        <div class="glass-card rounded-2xl p-6 space-y-4">
+      legacyGrid.innerHTML = siteData.legacyPillars.map((pil, idx) => `
+        <div class="glass-card rounded-2xl p-6 space-y-4 reveal-item reveal-fade-up stagger-${(idx % 3) + 1}">
           <div class="w-11 h-11 rounded-xl bg-amber-500/15 border border-amber-400/30 flex items-center justify-center text-amber-400">
             <i data-lucide="${escapeHtml(pil.icon)}" class="w-5 h-5"></i>
           </div>
@@ -3589,9 +3620,9 @@
       // Experience Timeline
       renderExperienceTimeline();
 
-      // Education List
-      document.getElementById("educationList").innerHTML = siteData.education.map(ed => `
-        <div class="glass-card rounded-2xl p-5 flex items-start gap-4">
+      // Education List (With Staggered Scroll Animations)
+      document.getElementById("educationList").innerHTML = siteData.education.map((ed, idx) => `
+        <div class="glass-card rounded-2xl p-5 flex items-start gap-4 reveal-item reveal-fade-left stagger-${(idx % 3) + 1}">
           <div class="px-3 py-1.5 rounded-xl bg-amber-500/15 border border-amber-400/30 text-amber-300 font-bold text-xs shrink-0">
             ${escapeHtml(ed.year)}
           </div>
@@ -3602,9 +3633,9 @@
         </div>
       `).join("");
 
-      // Awards List
-      document.getElementById("awardsList").innerHTML = siteData.awards.map(aw => `
-        <div class="glass-card rounded-2xl p-5 flex items-start gap-4">
+      // Awards List (With Staggered Scroll Animations)
+      document.getElementById("awardsList").innerHTML = siteData.awards.map((aw, idx) => `
+        <div class="glass-card rounded-2xl p-5 flex items-start gap-4 reveal-item reveal-fade-right stagger-${(idx % 3) + 1}">
           <div class="px-3 py-1.5 rounded-xl bg-amber-500/15 border border-amber-400/30 text-amber-300 font-bold text-xs shrink-0">
             ${escapeHtml(aw.year)}
           </div>
@@ -3619,7 +3650,7 @@
       document.getElementById("pressGrid").innerHTML = siteData.press.map((pr, idx) => {
         const cardImg = pr.image || (idx % 2 === 0 ? siteData.hero.aboutImage : siteData.hero.heroImage);
         return `
-        <article class="glass-card rounded-2xl overflow-hidden flex flex-col justify-between reveal-item is-visible reveal-fade-up">
+        <article class="glass-card rounded-2xl overflow-hidden flex flex-col justify-between reveal-item reveal-fade-up stagger-${(idx % 3) + 1}">
           <div>
             ${showImgs && cardImg ? `
               <div class="h-40 w-full overflow-hidden bg-slate-900 border-b border-white/10">
@@ -3709,8 +3740,8 @@
       const socialGrid = document.getElementById("socialUpdatesGrid");
       if (socialGrid) {
         const updates = siteData.socialUpdates || DEFAULT_SITE_DATA.socialUpdates;
-        socialGrid.innerHTML = updates.map(up => `
-          <article class="glass-card rounded-2xl p-6 flex flex-col justify-between gap-4 reveal-item is-visible reveal-fade-up">
+        socialGrid.innerHTML = updates.map((up, idx) => `
+          <article class="glass-card rounded-2xl p-6 flex flex-col justify-between gap-4 reveal-item reveal-fade-up stagger-${(idx % 3) + 1}">
             <div class="space-y-2.5">
               <div class="flex items-center justify-between gap-2 text-xs">
                 <span class="px-2.5 py-0.5 rounded-full bg-amber-500/20 text-amber-300 font-bold">${escapeHtml(up.badge)}</span>
@@ -4107,8 +4138,8 @@
         ? siteData.experience
         : siteData.experience.filter(item => item.category === activeExpFilter);
 
-      container.innerHTML = filtered.map(item => `
-        <div class="relative group reveal-item is-visible reveal-fade-up">
+      container.innerHTML = filtered.map((item, idx) => `
+        <div class="relative group reveal-item reveal-fade-up stagger-${(idx % 4) + 1}">
           <div class="absolute -left-[31px] sm:-left-[39px] top-1.5 w-4 h-4 rounded-full border-2 border-amber-400 bg-slate-950 group-hover:scale-125 transition"></div>
           <div class="glass-card rounded-2xl p-5 sm:p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <div class="space-y-1">
@@ -4148,14 +4179,22 @@
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add("is-visible");
+            revealObserver.unobserve(entry.target);
           }
         });
-      }, { threshold: 0.05, rootMargin: "0px 0px -20px 0px" });
+      }, { threshold: 0.08, rootMargin: "0px 0px -30px 0px" });
 
       items.forEach(el => {
-        if (isAdminAuthenticated || el.classList.contains("is-visible")) {
+        if (isAdminAuthenticated) {
+          el.classList.add("is-visible");
+          return;
+        }
+        // Elements already in visible viewport at initial load reveal immediately
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight && rect.bottom > 0) {
           el.classList.add("is-visible");
         } else {
+          el.classList.remove("is-visible");
           revealObserver.observe(el);
         }
       });
