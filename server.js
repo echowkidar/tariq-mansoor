@@ -17,6 +17,13 @@ app.use(express.json({ limit: '50mb' }));
 
 function renderIndexWithEnv(isAdminRoute) {
   let html = fs.readFileSync(path.join(__dirname, 'public', 'index.html'), 'utf8');
+  let savedServerState = null;
+  if (fs.existsSync(STATE_FILE)) {
+    try {
+      const raw = fs.readFileSync(STATE_FILE, 'utf8');
+      savedServerState = JSON.parse(raw);
+    } catch (e) {}
+  }
   const envPayload = {
     DOMAIN,
     STACK_ENV: 'portainer-production',
@@ -24,6 +31,7 @@ function renderIndexWithEnv(isAdminRoute) {
   };
   const envScript = `<script>
     window.__PORTAINER_ENV__ = ${JSON.stringify(envPayload)};
+    window.__INITIAL_SERVER_STATE__ = ${JSON.stringify(savedServerState)};
     window.__PORTAINER_API__ = {
       loadState: async () => {
         try { const r = await fetch("/api/state"); return r.ok ? await r.json() : null; } catch (e) { return null; }

@@ -2140,25 +2140,70 @@
                 <textarea id="cmsHeroRoles" rows="4" class="w-full px-3.5 py-2.5 rounded-xl bg-black/40 border border-white/15 text-sm font-mono"></textarea>
               </div>
 
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2 border-t border-white/10">
-                <div>
-                  <label class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1">Hero Portrait Image URL</label>
-                  <input id="cmsHeroImgUrl" type="text" class="w-full px-3.5 py-2 rounded-xl bg-black/40 border border-white/15 text-xs mb-2" />
-                  <label class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-xs cursor-pointer">
-                    <i data-lucide="upload" class="w-3.5 h-3.5"></i>
-                    <span>Upload Hero Image from Device</span>
-                    <input id="cmsHeroImgUpload" type="file" accept="image/*" class="hidden" />
-                  </label>
+              <!-- Hero & About Images with Live Preview & Specification Badges -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 pt-3 border-t border-white/10">
+                <!-- Hero Portrait Card -->
+                <div class="p-4 rounded-2xl bg-black/40 border border-white/10 space-y-3">
+                  <div class="flex items-center justify-between">
+                    <label class="block text-xs font-bold uppercase tracking-wider text-amber-400">Hero Main Portrait</label>
+                    <span class="text-[10px] font-semibold px-2 py-0.5 rounded bg-amber-500/20 text-amber-300">Frontal Portrait</span>
+                  </div>
+                  
+                  <div class="flex items-center gap-3">
+                    <div class="w-16 h-20 rounded-xl overflow-hidden bg-slate-950 border border-white/20 shrink-0 shadow-md">
+                      <img id="cmsHeroImgPreview" src="" alt="Hero preview" class="w-full h-full object-cover" onerror="this.onerror=null; this.src=window.FALLBACK_PORTRAIT_SVG;" />
+                    </div>
+                    <div class="space-y-1.5 flex-1 min-w-0">
+                      <input id="cmsHeroImgUrl" type="text" placeholder="https://image-url..." class="w-full px-3 py-1.5 rounded-lg bg-black/60 border border-white/15 text-xs text-white" />
+                      <label class="w-full inline-flex items-center justify-center gap-2 px-3 py-2 rounded-xl accent-btn text-xs font-semibold cursor-pointer shadow-md">
+                        <i data-lucide="upload" class="w-3.5 h-3.5"></i>
+                        <span>Upload New Portrait</span>
+                        <input id="cmsHeroImgUpload" type="file" accept="image/*" class="hidden" />
+                      </label>
+                    </div>
+                  </div>
+
+                  <!-- Image Specification Badge -->
+                  <div class="p-2.5 rounded-xl bg-slate-950/60 border border-white/5 space-y-1 text-[11px] text-slate-300">
+                    <div class="flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-[10px] text-amber-300">
+                      <span>📐 800 × 1000 px (4:5 Ratio)</span>
+                      <span>💾 JPG / PNG / WebP</span>
+                      <span>⚡ Auto-compressed (&lt;500 KB)</span>
+                    </div>
+                    <p class="text-[10px] text-slate-400 leading-tight">High-resolution executive studio portrait with head and chest centered. Auto-optimized on upload.</p>
+                  </div>
                 </div>
 
-                <div>
-                  <label class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1">About Section Photo URL</label>
-                  <input id="cmsAboutImgUrl" type="text" class="w-full px-3.5 py-2 rounded-xl bg-black/40 border border-white/15 text-xs mb-2" />
-                  <label class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-xs cursor-pointer">
-                    <i data-lucide="upload" class="w-3.5 h-3.5"></i>
-                    <span>Upload About Photo from Device</span>
-                    <input id="cmsAboutImgUpload" type="file" accept="image/*" class="hidden" />
-                  </label>
+                <!-- About Section Landmark Photo Card -->
+                <div class="p-4 rounded-2xl bg-black/40 border border-white/10 space-y-3">
+                  <div class="flex items-center justify-between">
+                    <label class="block text-xs font-bold uppercase tracking-wider text-sky-400">About Section Landmark / Event</label>
+                    <span class="text-[10px] font-semibold px-2 py-0.5 rounded bg-sky-500/20 text-sky-300">Landscape Banner</span>
+                  </div>
+
+                  <div class="flex items-center gap-3">
+                    <div class="w-20 h-20 rounded-xl overflow-hidden bg-slate-950 border border-white/20 shrink-0 shadow-md">
+                      <img id="cmsAboutImgPreview" src="" alt="About preview" class="w-full h-full object-cover" onerror="this.onerror=null; this.src=window.FALLBACK_SECONDARY_SVG;" />
+                    </div>
+                    <div class="space-y-1.5 flex-1 min-w-0">
+                      <input id="cmsAboutImgUrl" type="text" placeholder="https://image-url..." class="w-full px-3 py-1.5 rounded-lg bg-black/60 border border-white/15 text-xs text-white" />
+                      <label class="w-full inline-flex items-center justify-center gap-2 px-3 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-white text-xs font-semibold cursor-pointer shadow-md border border-white/15">
+                        <i data-lucide="upload" class="w-3.5 h-3.5 text-sky-400"></i>
+                        <span>Upload About Photo</span>
+                        <input id="cmsAboutImgUpload" type="file" accept="image/*" class="hidden" />
+                      </label>
+                    </div>
+                  </div>
+
+                  <!-- Image Specification Badge -->
+                  <div class="p-2.5 rounded-xl bg-slate-950/60 border border-white/5 space-y-1 text-[11px] text-slate-300">
+                    <div class="flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-[10px] text-sky-300">
+                      <span>📐 1200 × 800 px (3:2 Ratio)</span>
+                      <span>💾 JPG / PNG / WebP</span>
+                      <span>⚡ Auto-compressed (&lt;600 KB)</span>
+                    </div>
+                    <p class="text-[10px] text-slate-400 leading-tight">AMU Bab-e-Syed architectural landmark, public convocation, or summit delegation snapshot.</p>
+                  </div>
                 </div>
               </div>
 
@@ -2198,6 +2243,20 @@
             <div id="cmsPane-positions" class="cms-pane hidden space-y-5">
               <div class="flex items-center justify-between border-b border-white/10 pb-2">
                 <h3 class="text-lg font-bold">Manage Held Positions / Portfolio Cards</h3>
+              </div>
+
+              <!-- Image Specification Guidance Banner -->
+              <div class="p-3.5 rounded-2xl bg-amber-950/30 border border-amber-400/25 flex flex-wrap items-center justify-between gap-3 text-xs">
+                <div class="flex items-center gap-2.5">
+                  <div class="w-8 h-8 rounded-lg bg-amber-500/20 text-amber-400 flex items-center justify-center shrink-0">
+                    <i data-lucide="image" class="w-4 h-4"></i>
+                  </div>
+                  <div>
+                    <span class="font-bold text-amber-300">Positions Cover Photo Specification</span>
+                    <p class="text-[11px] text-slate-300">Recommended: <strong>800 × 480 px (16:9 or 5:3 landscape)</strong> • Formats: <strong>JPG, PNG, WebP</strong> • Max: &lt;400 KB (Auto-compressed)</p>
+                  </div>
+                </div>
+                <span class="text-[10px] font-mono px-2 py-1 rounded bg-black/40 text-slate-300 border border-white/10">Ratio: 16:9</span>
               </div>
 
               <!-- Add New Position Form -->
@@ -2297,6 +2356,20 @@
             <!-- TAB 6: PRESS & MEDIA -->
             <div id="cmsPane-press" class="cms-pane hidden space-y-5">
               <h3 class="text-lg font-bold border-b border-white/10 pb-2">Manage Press, Media &amp; Op-Ed Articles</h3>
+
+              <!-- Image Specification Guidance Banner -->
+              <div class="p-3.5 rounded-2xl bg-sky-950/30 border border-sky-400/25 flex flex-wrap items-center justify-between gap-3 text-xs">
+                <div class="flex items-center gap-2.5">
+                  <div class="w-8 h-8 rounded-lg bg-sky-500/20 text-sky-400 flex items-center justify-center shrink-0">
+                    <i data-lucide="newspaper" class="w-4 h-4"></i>
+                  </div>
+                  <div>
+                    <span class="font-bold text-sky-300">Press Article Image Specification</span>
+                    <p class="text-[11px] text-slate-300">Recommended: <strong>700 × 400 px (16:9 landscape)</strong> • Formats: <strong>JPG, PNG, WebP</strong> • Max: &lt;400 KB (Auto-compressed)</p>
+                  </div>
+                </div>
+                <span class="text-[10px] font-mono px-2 py-1 rounded bg-black/40 text-slate-300 border border-white/10">Ratio: 16:9</span>
+              </div>
               <div class="p-4 rounded-2xl bg-black/30 border border-white/10 space-y-3">
                 <h4 class="text-xs font-bold uppercase tracking-wider text-amber-400">Add Press Article or Op-Ed Link</h4>
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
@@ -2446,6 +2519,113 @@
                   <button type="button" id="cmsToggleThreeBtn" class="px-4 py-2 rounded-xl text-xs font-semibold bg-white/10 hover:bg-white/20">
                     Toggle 3D Canvas
                   </button>
+                </div>
+              </div>
+
+              <!-- Theme Galleries & Event Photo Strips (Theme 5 WordPress & Theme 7 Nitin Gadkari) -->
+              <div class="space-y-4 pt-4 border-t border-white/10">
+                <div class="flex flex-wrap items-center justify-between gap-2">
+                  <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-amber-400">Theme Visual Assets &amp; Event Photo Strips</label>
+                    <p class="text-xs text-slate-300">Customize the 4 Visionary Pillars (Theme 7 - Nitin Gadkari) and 4 Event Strips (Theme 5 WordPress &amp; Theme 7)</p>
+                  </div>
+                  <span class="text-[10px] font-mono px-2 py-1 rounded bg-amber-500/20 text-amber-300 border border-amber-400/30">Specs: 600 × 400 px (3:2) • &lt;350 KB</span>
+                </div>
+
+                <div class="space-y-3">
+                  <h4 class="text-xs font-extrabold uppercase tracking-wide text-white">4 Visionary Pillars (Theme 7: Nitin Gadkari Replica)</h4>
+                  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+                    <div class="p-3 rounded-xl bg-black/40 border border-white/10 space-y-2">
+                      <div class="h-24 rounded-lg overflow-hidden bg-slate-950 border border-white/10">
+                        <img id="tgPrev_pillar1" src="" alt="Pillar 1" class="w-full h-full object-cover" onerror="this.onerror=null; this.src=window.FALLBACK_SECONDARY_SVG;" />
+                      </div>
+                      <p class="text-[11px] font-bold text-amber-300 truncate">Pillar 1: Modi / VP BJP</p>
+                      <label class="w-full py-1.5 px-2 rounded-lg bg-white/10 hover:bg-white/20 text-[11px] font-semibold text-center cursor-pointer block border border-white/10">
+                        <span>Change Photo</span>
+                        <input type="file" accept="image/*" data-tg-key="pillar1" class="hidden" />
+                      </label>
+                    </div>
+
+                    <div class="p-3 rounded-xl bg-black/40 border border-white/10 space-y-2">
+                      <div class="h-24 rounded-lg overflow-hidden bg-slate-950 border border-white/10">
+                        <img id="tgPrev_pillar2" src="" alt="Pillar 2" class="w-full h-full object-cover" onerror="this.onerror=null; this.src=window.FALLBACK_SECONDARY_SVG;" />
+                      </div>
+                      <p class="text-[11px] font-bold text-amber-300 truncate">Pillar 2: MLC UP Council</p>
+                      <label class="w-full py-1.5 px-2 rounded-lg bg-white/10 hover:bg-white/20 text-[11px] font-semibold text-center cursor-pointer block border border-white/10">
+                        <span>Change Photo</span>
+                        <input type="file" accept="image/*" data-tg-key="pillar2" class="hidden" />
+                      </label>
+                    </div>
+
+                    <div class="p-3 rounded-xl bg-black/40 border border-white/10 space-y-2">
+                      <div class="h-24 rounded-lg overflow-hidden bg-slate-950 border border-white/10">
+                        <img id="tgPrev_pillar3" src="" alt="Pillar 3" class="w-full h-full object-cover" onerror="this.onerror=null; this.src=window.FALLBACK_SECONDARY_SVG;" />
+                      </div>
+                      <p class="text-[11px] font-bold text-amber-300 truncate">Pillar 3: AMU VC Legacy</p>
+                      <label class="w-full py-1.5 px-2 rounded-lg bg-white/10 hover:bg-white/20 text-[11px] font-semibold text-center cursor-pointer block border border-white/10">
+                        <span>Change Photo</span>
+                        <input type="file" accept="image/*" data-tg-key="pillar3" class="hidden" />
+                      </label>
+                    </div>
+
+                    <div class="p-3 rounded-xl bg-black/40 border border-white/10 space-y-2">
+                      <div class="h-24 rounded-lg overflow-hidden bg-slate-950 border border-white/10">
+                        <img id="tgPrev_pillar4" src="" alt="Pillar 4" class="w-full h-full object-cover" onerror="this.onerror=null; this.src=window.FALLBACK_SECONDARY_SVG;" />
+                      </div>
+                      <p class="text-[11px] font-bold text-amber-300 truncate">Pillar 4: JNMC Principal</p>
+                      <label class="w-full py-1.5 px-2 rounded-lg bg-white/10 hover:bg-white/20 text-[11px] font-semibold text-center cursor-pointer block border border-white/10">
+                        <span>Change Photo</span>
+                        <input type="file" accept="image/*" data-tg-key="pillar4" class="hidden" />
+                      </label>
+                    </div>
+                  </div>
+
+                  <h4 class="text-xs font-extrabold uppercase tracking-wide text-white pt-2">4 Event Highlights Photo Strip (Theme 5 WordPress &amp; Theme 7 Gallery)</h4>
+                  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+                    <div class="p-3 rounded-xl bg-black/40 border border-white/10 space-y-2">
+                      <div class="h-24 rounded-lg overflow-hidden bg-slate-950 border border-white/10">
+                        <img id="tgPrev_strip1" src="" alt="Strip 1" class="w-full h-full object-cover" onerror="this.onerror=null; this.src=window.FALLBACK_SECONDARY_SVG;" />
+                      </div>
+                      <p class="text-[11px] font-bold text-sky-300 truncate">Strip 1: Keynote / Event</p>
+                      <label class="w-full py-1.5 px-2 rounded-lg bg-white/10 hover:bg-white/20 text-[11px] font-semibold text-center cursor-pointer block border border-white/10">
+                        <span>Change Photo</span>
+                        <input type="file" accept="image/*" data-tg-key="strip1" class="hidden" />
+                      </label>
+                    </div>
+
+                    <div class="p-3 rounded-xl bg-black/40 border border-white/10 space-y-2">
+                      <div class="h-24 rounded-lg overflow-hidden bg-slate-950 border border-white/10">
+                        <img id="tgPrev_strip2" src="" alt="Strip 2" class="w-full h-full object-cover" onerror="this.onerror=null; this.src=window.FALLBACK_SECONDARY_SVG;" />
+                      </div>
+                      <p class="text-[11px] font-bold text-sky-300 truncate">Strip 2: Interfaith Summit</p>
+                      <label class="w-full py-1.5 px-2 rounded-lg bg-white/10 hover:bg-white/20 text-[11px] font-semibold text-center cursor-pointer block border border-white/10">
+                        <span>Change Photo</span>
+                        <input type="file" accept="image/*" data-tg-key="strip2" class="hidden" />
+                      </label>
+                    </div>
+
+                    <div class="p-3 rounded-xl bg-black/40 border border-white/10 space-y-2">
+                      <div class="h-24 rounded-lg overflow-hidden bg-slate-950 border border-white/10">
+                        <img id="tgPrev_strip3" src="" alt="Strip 3" class="w-full h-full object-cover" onerror="this.onerror=null; this.src=window.FALLBACK_SECONDARY_SVG;" />
+                      </div>
+                      <p class="text-[11px] font-bold text-sky-300 truncate">Strip 3: Campus Inspection</p>
+                      <label class="w-full py-1.5 px-2 rounded-lg bg-white/10 hover:bg-white/20 text-[11px] font-semibold text-center cursor-pointer block border border-white/10">
+                        <span>Change Photo</span>
+                        <input type="file" accept="image/*" data-tg-key="strip3" class="hidden" />
+                      </label>
+                    </div>
+
+                    <div class="p-3 rounded-xl bg-black/40 border border-white/10 space-y-2">
+                      <div class="h-24 rounded-lg overflow-hidden bg-slate-950 border border-white/10">
+                        <img id="tgPrev_strip4" src="" alt="Strip 4" class="w-full h-full object-cover" onerror="this.onerror=null; this.src=window.FALLBACK_SECONDARY_SVG;" />
+                      </div>
+                      <p class="text-[11px] font-bold text-sky-300 truncate">Strip 4: Convocation Hall</p>
+                      <label class="w-full py-1.5 px-2 rounded-lg bg-white/10 hover:bg-white/20 text-[11px] font-semibold text-center cursor-pointer block border border-white/10">
+                        <span>Change Photo</span>
+                        <input type="file" accept="image/*" data-tg-key="strip4" class="hidden" />
+                      </label>
+                    </div>
+                  </div>
                 </div>
               </div>
 
@@ -2656,6 +2836,67 @@
   </div>
 
   <!-- ===================================================================== -->
+  <!-- CMS SAFE RESET OPTIONS MODAL (PREVENTS ACCIDENTAL DATA LOSS)          -->
+  <!-- ===================================================================== -->
+  <div id="cmsResetOptionsModal" class="fixed inset-0 z-[120] bg-black/85 backdrop-blur-md flex items-center justify-center p-4 hidden">
+    <div class="glass-panel max-w-lg w-full rounded-3xl p-6 sm:p-7 border border-white/20 shadow-2xl space-y-5 bg-slate-900 text-white">
+      <div class="flex items-center justify-between border-b border-white/10 pb-3">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-2xl bg-amber-500/20 text-amber-400 flex items-center justify-center">
+            <i data-lucide="rotate-ccw" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <h3 class="text-base font-bold text-white">Reset Portfolio Configuration</h3>
+            <p class="text-xs text-slate-300">Choose your reset option carefully</p>
+          </div>
+        </div>
+        <button type="button" id="closeResetModalBtn" class="text-slate-400 hover:text-white p-1">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <div class="space-y-4">
+        <!-- Option 1: Safe Theme & Appearance Reset -->
+        <div class="p-4 rounded-2xl bg-emerald-950/40 border border-emerald-500/40 space-y-2">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider flex items-center gap-1.5">
+              <i data-lucide="shield-check" class="w-4 h-4 text-emerald-400"></i>
+              <span>Option 1: Safe Theme &amp; Styling Reset</span>
+            </span>
+            <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/20 text-emerald-300">Zero Data Loss</span>
+          </div>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            Restores the default layout theme (Executive Statesman), Royal Navy &amp; Gold palette, animation speed, and Dark Mode.
+            <strong class="text-emerald-300 block mt-1">✓ Completely protects 100% of your biography text, uploaded photos, held positions, press articles, and CV intact!</strong>
+          </p>
+          <button type="button" id="confirmResetThemeOnlyBtn" class="w-full mt-2 py-2.5 px-4 rounded-xl text-xs font-bold bg-emerald-600 hover:bg-emerald-500 text-white transition flex items-center justify-center gap-2 shadow-lg">
+            <i data-lucide="palette" class="w-4 h-4"></i>
+            <span>Reset Theme &amp; Appearance Only</span>
+          </button>
+        </div>
+
+        <!-- Option 2: Full Factory Reset -->
+        <div class="p-4 rounded-2xl bg-rose-950/30 border border-rose-500/30 space-y-2">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-rose-400 uppercase tracking-wider flex items-center gap-1.5">
+              <i data-lucide="alert-triangle" class="w-4 h-4 text-rose-400"></i>
+              <span>Option 2: Factory Reset Everything</span>
+            </span>
+            <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-rose-500/20 text-rose-300">Restores Sample Demo</span>
+          </div>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            Reverts all customized text, custom uploads, and new cards back to the original demo sample data.
+          </p>
+          <button type="button" id="confirmResetFactoryBtn" class="w-full mt-2 py-2.5 px-4 rounded-xl text-xs font-bold bg-rose-600 hover:bg-rose-500 text-white transition flex items-center justify-center gap-2 shadow-lg">
+            <i data-lucide="trash-2" class="w-4 h-4"></i>
+            <span>Factory Reset All Content &amp; Media</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================================================================== -->
     <!-- ===================================================================== -->
   <!-- ADMIN CONTROL PANEL LOGIN MODAL (ENVIRONMENT VARIABLE AUTH GATE)      -->
   <!-- ===================================================================== -->
@@ -2847,6 +3088,16 @@
           link: "https://www.vidhanparishadproceedings.up.gov.in/government/page/members_legislative_council_with_permanent_local_addresses"
         }
       ],
+      themeGallery: {
+        pillar1: window.TM_CROPPED_PHOTOS.role1_modi,
+        pillar2: window.TM_CROPPED_PHOTOS.role2_mlc,
+        pillar3: window.TM_CROPPED_PHOTOS.role3_amu,
+        pillar4: window.TM_CROPPED_PHOTOS.role4_jnmc,
+        strip1: window.TM_CROPPED_PHOTOS.strip1,
+        strip2: window.TM_CROPPED_PHOTOS.strip2,
+        strip3: window.TM_CROPPED_PHOTOS.strip3,
+        strip4: window.TM_CROPPED_PHOTOS.strip4
+      },
       hero: {
         eyebrow: "Statesman • Academician • Surgeon • Institution Builder",
         title: "Prof. Tariq Mansoor",
@@ -3061,6 +3312,11 @@
 
     function loadState() {
       try {
+        if (window.__INITIAL_SERVER_STATE__ && typeof window.__INITIAL_SERVER_STATE__ === "object" && Object.keys(window.__INITIAL_SERVER_STATE__).length > 0) {
+          siteData = Object.assign({}, DEFAULT_SITE_DATA, window.__INITIAL_SERVER_STATE__);
+          try { localStorage.setItem(STORAGE_KEY, JSON.stringify(siteData)); } catch (err) {}
+          return;
+        }
         const raw = localStorage.getItem(STORAGE_KEY);
         if (raw) {
           const parsed = JSON.parse(raw);
@@ -3069,6 +3325,49 @@
       } catch (e) {
         siteData = JSON.parse(JSON.stringify(DEFAULT_SITE_DATA));
       }
+    }
+
+    // Senior Developer Helper: Client-Side Image Resizer & Optimizer (WebP/JPEG, Max 1200px)
+    // Prevents localStorage quota overflow, keeps site_state.json lightweight, and loads blazing fast on mobile
+    function optimizeAndReadImage(file, maxDim = 1200, quality = 0.82) {
+      return new Promise((resolve) => {
+        if (!file || !file.type.startsWith("image/")) {
+          return resolve(null);
+        }
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          const img = new Image();
+          img.onload = () => {
+            let width = img.width;
+            let height = img.height;
+            if (width > maxDim || height > maxDim) {
+              if (width > height) {
+                height = Math.round((height * maxDim) / width);
+                width = maxDim;
+              } else {
+                width = Math.round((width * maxDim) / height);
+                height = maxDim;
+              }
+            }
+            const canvas = document.createElement("canvas");
+            canvas.width = width;
+            canvas.height = height;
+            const ctx = canvas.getContext("2d");
+            ctx.drawImage(img, 0, 0, width, height);
+            try {
+              const webp = canvas.toDataURL("image/webp", quality);
+              if (webp && webp.startsWith("data:image/webp")) {
+                return resolve(webp);
+              }
+            } catch (err) {}
+            resolve(canvas.toDataURL("image/jpeg", quality));
+          };
+          img.onerror = () => resolve(e.target.result);
+          img.src = e.target.result;
+        };
+        reader.onerror = () => resolve(null);
+        reader.readAsDataURL(file);
+      });
     }
 
     function saveState() {
@@ -3458,11 +3757,12 @@
 
       const wpStrip = document.getElementById("wpFourPhotoStrip");
       if (wpStrip && window.TM_CROPPED_PHOTOS) {
+        const tg = siteData.themeGallery || {};
         const stripImgs = [
-          window.TM_CROPPED_PHOTOS.strip1,
-          window.TM_CROPPED_PHOTOS.strip2,
-          window.TM_CROPPED_PHOTOS.strip3,
-          window.TM_CROPPED_PHOTOS.strip4
+          tg.strip1 || window.TM_CROPPED_PHOTOS.strip1,
+          tg.strip2 || window.TM_CROPPED_PHOTOS.strip2,
+          tg.strip3 || window.TM_CROPPED_PHOTOS.strip3,
+          tg.strip4 || window.TM_CROPPED_PHOTOS.strip4
         ];
         wpStrip.innerHTML = stripImgs.map((src, i) => `
           <div class="rounded-lg overflow-hidden border border-[#3b1d66] bg-[#160a24] h-28 sm:h-36">
@@ -3676,11 +3976,12 @@
         // 4 Visionary Columns with Top Photos + Dark Navy "Read More »" Buttons
         const visCols = document.getElementById("ngFourVisionaryCols");
         if (visCols && window.TM_CROPPED_PHOTOS) {
+          const tg = siteData.themeGallery || {};
           const pillars = [
-            { img: window.TM_CROPPED_PHOTOS.role1_modi, title: "PROF. MANSOOR'S BIOGRAPHY", desc: "Over four decades of dedicated service in higher education, clinical surgery, academic administration, and national public policy." },
-            { img: window.TM_CROPPED_PHOTOS.role2_mlc, title: "POLITICAL BELIEF", desc: "Committed to politics as an instrument of socio-economic reform, Pasmanda empowerment, and Sabka Saath, Sabka Vikas." },
-            { img: window.TM_CROPPED_PHOTOS.role3_amu, title: "INSTITUTION BUILDER (AMU VC)", desc: "Led Aligarh Muslim University (2017–2023) to NAAC A+ accreditation and UGC Category-II Autonomy with new AI & medical colleges." },
-            { img: window.TM_CROPPED_PHOTOS.role4_jnmc, title: "PUBLIC SERVICE AS MLC & SURGEON", desc: "Nominated Member of UP Legislative Council (since April 2023), author of 120+ research publications, and supervisor of 62 PG theses." }
+            { img: tg.pillar1 || window.TM_CROPPED_PHOTOS.role1_modi, title: "PROF. MANSOOR'S BIOGRAPHY", desc: "Over four decades of dedicated service in higher education, clinical surgery, academic administration, and national public policy." },
+            { img: tg.pillar2 || window.TM_CROPPED_PHOTOS.role2_mlc, title: "POLITICAL BELIEF", desc: "Committed to politics as an instrument of socio-economic reform, Pasmanda empowerment, and Sabka Saath, Sabka Vikas." },
+            { img: tg.pillar3 || window.TM_CROPPED_PHOTOS.role3_amu, title: "INSTITUTION BUILDER (AMU VC)", desc: "Led Aligarh Muslim University (2017–2023) to NAAC A+ accreditation and UGC Category-II Autonomy with new AI & medical colleges." },
+            { img: tg.pillar4 || window.TM_CROPPED_PHOTOS.role4_jnmc, title: "PUBLIC SERVICE AS MLC & SURGEON", desc: "Nominated Member of UP Legislative Council (since April 2023), author of 120+ research publications, and supervisor of 62 PG theses." }
           ];
           visCols.innerHTML = pillars.map(p => `
             <div class="flex flex-col justify-between items-center space-y-3">
@@ -3751,12 +4052,13 @@
         // Gallery 2 Side-by-Side Photos
         const galPair = document.getElementById("ngGalleryPair");
         if (galPair && window.TM_CROPPED_PHOTOS) {
+          const tg = siteData.themeGallery || {};
           galPair.innerHTML = `
             <div class="border-4 border-white shadow-lg overflow-hidden">
-              <img src="${window.TM_CROPPED_PHOTOS.strip1}" alt="Gallery 1" class="w-full h-56 object-cover" />
+              <img src="${tg.strip1 || window.TM_CROPPED_PHOTOS.strip1}" alt="Gallery 1" class="w-full h-56 object-cover" />
             </div>
             <div class="border-4 border-white shadow-lg overflow-hidden">
-              <img src="${window.TM_CROPPED_PHOTOS.strip4}" alt="Gallery 2" class="w-full h-56 object-cover" />
+              <img src="${tg.strip4 || window.TM_CROPPED_PHOTOS.strip4}" alt="Gallery 2" class="w-full h-56 object-cover" />
             </div>
           `;
         }
@@ -3928,6 +4230,29 @@
       document.getElementById("cmsAboutImgUrl").value = siteData.hero.aboutImage;
       document.getElementById("cmsProfilePdfUrl").value = siteData.hero.profilePdfUrl;
 
+      // Populate Live Hero & About Image Thumbnails
+      const heroPrev = document.getElementById("cmsHeroImgPreview");
+      if (heroPrev) heroPrev.src = siteData.hero.heroImage || window.FALLBACK_PORTRAIT_SVG;
+      const aboutPrev = document.getElementById("cmsAboutImgPreview");
+      if (aboutPrev) aboutPrev.src = siteData.hero.aboutImage || window.FALLBACK_SECONDARY_SVG;
+
+      // Populate Theme Gallery Thumbnails (Theme 5 & 7)
+      const tg = siteData.themeGallery || {};
+      const tgDefaults = {
+        pillar1: window.TM_CROPPED_PHOTOS ? window.TM_CROPPED_PHOTOS.role1_modi : "",
+        pillar2: window.TM_CROPPED_PHOTOS ? window.TM_CROPPED_PHOTOS.role2_mlc : "",
+        pillar3: window.TM_CROPPED_PHOTOS ? window.TM_CROPPED_PHOTOS.role3_amu : "",
+        pillar4: window.TM_CROPPED_PHOTOS ? window.TM_CROPPED_PHOTOS.role4_jnmc : "",
+        strip1: window.TM_CROPPED_PHOTOS ? window.TM_CROPPED_PHOTOS.strip1 : "",
+        strip2: window.TM_CROPPED_PHOTOS ? window.TM_CROPPED_PHOTOS.strip2 : "",
+        strip3: window.TM_CROPPED_PHOTOS ? window.TM_CROPPED_PHOTOS.strip3 : "",
+        strip4: window.TM_CROPPED_PHOTOS ? window.TM_CROPPED_PHOTOS.strip4 : ""
+      };
+      Object.keys(tgDefaults).forEach(k => {
+        const el = document.getElementById("tgPrev_" + k);
+        if (el) el.src = tg[k] || tgDefaults[k] || window.FALLBACK_SECONDARY_SVG;
+      });
+
       document.getElementById("cmsAboutHeading").value = siteData.about.heading;
       document.getElementById("cmsAboutParagraphs").value = siteData.about.paragraphs.join("\n\n");
       document.getElementById("cmsAboutHighlights").value = siteData.about.highlights.join("\n");
@@ -4002,16 +4327,25 @@
         </div>
       `).join("");
 
-      // CMS Press List
+      // CMS Press List (With Per-Card Image Preview & Upload Provision)
       document.getElementById("cmsPressList").innerHTML = siteData.press.map((pr, idx) => `
-        <div class="p-3 rounded-xl bg-black/40 border border-white/10 flex items-center justify-between gap-3">
-          <div>
-            <p class="text-xs font-bold text-amber-400">${escapeHtml(pr.pub)} (${escapeHtml(pr.date)})</p>
-            <p class="text-sm font-semibold">${escapeHtml(pr.headline)}</p>
+        <div class="p-3.5 rounded-xl bg-black/40 border border-white/10 flex flex-wrap items-center justify-between gap-3">
+          <div class="flex items-center gap-3">
+            <img src="${escapeHtml(pr.image || siteData.hero.aboutImage)}" alt="Press thumb" class="w-12 h-12 rounded-lg object-cover border border-white/15 shrink-0" onerror="this.onerror=null; this.src=window.FALLBACK_SECONDARY_SVG;" />
+            <div class="max-w-md">
+              <p class="text-xs font-bold text-amber-400">${escapeHtml(pr.pub)} • ${escapeHtml(pr.date)}</p>
+              <p class="text-sm font-semibold line-clamp-1">${escapeHtml(pr.headline)}</p>
+            </div>
           </div>
-          <button type="button" data-del-press="${idx}" class="px-2.5 py-1 rounded-lg bg-rose-500/20 text-rose-300 text-xs font-semibold shrink-0">
-            Delete
-          </button>
+          <div class="flex items-center gap-2">
+            <label class="px-2.5 py-1.5 rounded-lg bg-sky-500/20 text-sky-300 hover:bg-sky-500/30 text-xs font-semibold cursor-pointer shrink-0">
+              <span>Change Image</span>
+              <input type="file" accept="image/*" data-press-img-idx="${idx}" class="hidden" />
+            </label>
+            <button type="button" data-del-press="${idx}" class="px-2.5 py-1.5 rounded-lg bg-rose-500/20 text-rose-300 hover:bg-rose-500/30 text-xs font-semibold shrink-0">
+              Delete
+            </button>
+          </div>
         </div>
       `).join("");
 
@@ -4970,33 +5304,52 @@
         showToast("Hero & Media settings updated live!");
       });
 
-      // Local Device Image Upload Handlers (FileReader Data URL)
+      // Senior Developer Image Upload Handlers with Automatic Canvas Optimization (<400KB WebP/JPEG)
       document.getElementById("cmsHeroImgUpload").addEventListener("change", (e) => {
         const file = e.target.files && e.target.files[0];
         if (!file) return;
-        const reader = new FileReader();
-        reader.onload = () => {
-          document.getElementById("cmsHeroImgUrl").value = reader.result;
-          siteData.hero.heroImage = reader.result;
+        optimizeAndReadImage(file, 1200, 0.85).then((dataUrl) => {
+          if (!dataUrl) return;
+          document.getElementById("cmsHeroImgUrl").value = dataUrl;
+          const prev = document.getElementById("cmsHeroImgPreview");
+          if (prev) prev.src = dataUrl;
+          siteData.hero.heroImage = dataUrl;
           saveState();
           renderSite();
-          showToast("New Hero Portrait image uploaded & applied!");
-        };
-        reader.readAsDataURL(file);
+          showToast("New Hero Portrait optimized & applied!");
+        });
       });
 
       document.getElementById("cmsAboutImgUpload").addEventListener("change", (e) => {
         const file = e.target.files && e.target.files[0];
         if (!file) return;
-        const reader = new FileReader();
-        reader.onload = () => {
-          document.getElementById("cmsAboutImgUrl").value = reader.result;
-          siteData.hero.aboutImage = reader.result;
+        optimizeAndReadImage(file, 1200, 0.85).then((dataUrl) => {
+          if (!dataUrl) return;
+          document.getElementById("cmsAboutImgUrl").value = dataUrl;
+          const prev = document.getElementById("cmsAboutImgPreview");
+          if (prev) prev.src = dataUrl;
+          siteData.hero.aboutImage = dataUrl;
           saveState();
           renderSite();
-          showToast("New About Section image uploaded & applied!");
-        };
-        reader.readAsDataURL(file);
+          showToast("New About Section photo optimized & applied!");
+        });
+      });
+
+      // Theme Gallery (Theme 5 & 7) Photo Uploads
+      document.getElementById("cmsPane-design").addEventListener("change", (e) => {
+        const input = e.target.closest("[data-tg-key]");
+        if (!input || !input.files || !input.files[0]) return;
+        const key = input.getAttribute("data-tg-key");
+        optimizeAndReadImage(input.files[0], 1000, 0.82).then((dataUrl) => {
+          if (!dataUrl) return;
+          if (!siteData.themeGallery) siteData.themeGallery = {};
+          siteData.themeGallery[key] = dataUrl;
+          const prev = document.getElementById("tgPrev_" + key);
+          if (prev) prev.src = dataUrl;
+          saveState();
+          renderSite();
+          showToast("Theme photo updated & applied across themes!");
+        });
       });
 
       // Save Biography in CMS
@@ -5016,27 +5369,25 @@
       document.getElementById("newPosImgUpload").addEventListener("change", (e) => {
         const file = e.target.files && e.target.files[0];
         if (!file) return;
-        const reader = new FileReader();
-        reader.onload = () => {
-          pendingNewPosImgData = reader.result;
-          document.getElementById("newPosImgUrl").value = reader.result;
-          document.getElementById("newPosImgUploadLabel").textContent = "Loaded: " + file.name;
-          showToast("Card image ready for new Held Position!");
-        };
-        reader.readAsDataURL(file);
+        optimizeAndReadImage(file, 1000, 0.82).then((dataUrl) => {
+          if (!dataUrl) return;
+          pendingNewPosImgData = dataUrl;
+          document.getElementById("newPosImgUrl").value = dataUrl;
+          document.getElementById("newPosImgUploadLabel").textContent = "Optimized: " + file.name;
+          showToast("Card image optimized & ready for new Held Position!");
+        });
       });
 
       document.getElementById("newPressImgUpload").addEventListener("change", (e) => {
         const file = e.target.files && e.target.files[0];
         if (!file) return;
-        const reader = new FileReader();
-        reader.onload = () => {
-          pendingNewPressImgData = reader.result;
-          document.getElementById("newPressImgUrl").value = reader.result;
-          document.getElementById("newPressImgUploadLabel").textContent = "Loaded: " + file.name;
-          showToast("Card image ready for new Press item!");
-        };
-        reader.readAsDataURL(file);
+        optimizeAndReadImage(file, 1000, 0.82).then((dataUrl) => {
+          if (!dataUrl) return;
+          pendingNewPressImgData = dataUrl;
+          document.getElementById("newPressImgUrl").value = dataUrl;
+          document.getElementById("newPressImgUploadLabel").textContent = "Optimized: " + file.name;
+          showToast("Card image optimized & ready for new Press item!");
+        });
       });
 
       document.getElementById("toggleCardImagesCheck").addEventListener("change", (e) => {
@@ -5051,17 +5402,31 @@
         const input = e.target.closest("[data-pos-img-idx]");
         if (!input || !input.files || !input.files[0]) return;
         const idx = parseInt(input.getAttribute("data-pos-img-idx"), 10);
-        const reader = new FileReader();
-        reader.onload = () => {
-          if (siteData.positions[idx]) {
-            siteData.positions[idx].image = reader.result;
+        optimizeAndReadImage(input.files[0], 1000, 0.82).then((dataUrl) => {
+          if (dataUrl && siteData.positions[idx]) {
+            siteData.positions[idx].image = dataUrl;
             saveState();
             renderSite();
             populateCmsInputs();
             showToast("Updated cover image on card #" + (idx + 1) + "!");
           }
-        };
-        reader.readAsDataURL(input.files[0]);
+        });
+      });
+
+      // Per-card image replacement in CMS Press list
+      document.getElementById("cmsPressList").addEventListener("change", (e) => {
+        const input = e.target.closest("[data-press-img-idx]");
+        if (!input || !input.files || !input.files[0]) return;
+        const idx = parseInt(input.getAttribute("data-press-img-idx"), 10);
+        optimizeAndReadImage(input.files[0], 1000, 0.82).then((dataUrl) => {
+          if (dataUrl && siteData.press[idx]) {
+            siteData.press[idx].image = dataUrl;
+            saveState();
+            renderSite();
+            populateCmsInputs();
+            showToast("Updated cover image on press article #" + (idx + 1) + "!");
+          }
+        });
       });
 
       // Add New Position Card (With Image Provision)
@@ -5219,13 +5584,48 @@
         }, 120);
       });
 
-      // Reset CMS Data to Default
+      // Safe Two-Tier Reset System (Protects user text & images)
+      const resetModal = document.getElementById("cmsResetOptionsModal");
       document.getElementById("cmsResetDefaultBtn").addEventListener("click", () => {
-        siteData = JSON.parse(JSON.stringify(DEFAULT_SITE_DATA));
+        if (resetModal) {
+          resetModal.classList.remove("hidden");
+          lucide.createIcons();
+        }
+      });
+
+      const closeResetBtn = document.getElementById("closeResetModalBtn");
+      if (closeResetBtn) {
+        closeResetBtn.addEventListener("click", () => {
+          resetModal.classList.add("hidden");
+        });
+      }
+
+      // Option 1: Reset Theme & Styling Only (100% Data Safe)
+      document.getElementById("confirmResetThemeOnlyBtn").addEventListener("click", () => {
+        siteData.layoutTheme = "glass-statesman";
+        siteData.colorTheme = "royal";
+        siteData.glassBlur = 18;
+        siteData.animDuration = 0.75;
+        siteData.threeJsEnabled = true;
+        siteData.colorMode = "dark";
+        document.documentElement.classList.remove("light-mode");
         saveState();
         renderSite();
         populateCmsInputs();
-        showToast("Restored original tariqmansoor.com data!");
+        resetModal.classList.add("hidden");
+        showToast("Theme & layout reset to default! All your custom text and images were kept completely safe.", "success");
+      });
+
+      // Option 2: Factory Reset (Full Demo Data Restore with Confirmation)
+      document.getElementById("confirmResetFactoryBtn").addEventListener("click", () => {
+        if (confirm("Are you sure you want to perform a complete Factory Reset? All customized text, photos, and CV entries will be restored to initial sample data.")) {
+          siteData = JSON.parse(JSON.stringify(DEFAULT_SITE_DATA));
+          saveState();
+          renderSite();
+          populateCmsInputs();
+          resetModal.classList.add("hidden");
+          showToast("Factory demo sample data restored!", "info");
+        }
       });
 
       // Export JSON Backup
