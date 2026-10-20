@@ -234,10 +234,10 @@
       color: #0f172a !important;
     }
     body.mode-light #threeBgCanvas {
-      opacity: 0.85 !important;
+      opacity: 0.42 !important;
     }
     body.mode-light .ambient-orb {
-      opacity: 0.18 !important;
+      opacity: 0.12 !important;
     }
 
     /* Executive Statesman Topbar (Preserves commanding dark obsidian glass across Light & Dark mode) */
@@ -1515,6 +1515,31 @@
             Prof. Tariq Mansoor
           </h1>
 
+          <!-- Mobile-Only Hero Portrait Card (Shown right after Name on Mobile screens, Hidden on lg Desktop) -->
+          <div class="block lg:hidden my-5">
+            <div class="relative mx-auto max-w-sm">
+              <div class="absolute -inset-2 rounded-3xl opacity-50 blur-xl" style="background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));"></div>
+              <div class="relative glass-panel rounded-3xl p-3 overflow-hidden">
+                <div class="relative rounded-2xl overflow-hidden aspect-[4/5] bg-slate-900 shadow-xl">
+                  <img
+                    id="heroPortraitImgMobile"
+                    src="https://tariqmansoor.com/wp-content/uploads/2025/10/hero_img.webp"
+                    alt="Prof. Tariq Mansoor Official Portrait"
+                    class="w-full h-full object-cover object-top"
+                    onerror="this.onerror=null; this.src=window.FALLBACK_PORTRAIT_SVG;"
+                  />
+                  <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/25 to-transparent"></div>
+                  <!-- Floating Glass Credentials Card inside Mobile Portrait -->
+                  <div class="absolute bottom-2.5 left-2.5 right-2.5 glass-panel rounded-xl p-3">
+                    <p class="text-[10px] font-bold uppercase tracking-wider text-amber-400">Current Constitutional &amp; National Roles</p>
+                    <p id="portraitCaptionTitleMobile" class="text-xs font-bold text-white mt-0.5">National Vice President, BJP &amp; MLC (Uttar Pradesh)</p>
+                    <p class="text-[11px] text-slate-300 mt-0.5">Former Vice-Chancellor, Aligarh Muslim University (2017–2023)</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <!-- Primary Role Badges -->
           <div id="heroRolesList" class="flex flex-wrap gap-2.5">
             <!-- Populated dynamically from state -->
@@ -1553,8 +1578,8 @@
           </div>
         </div>
 
-        <!-- Right Column: Glassmorphic Portrait Frame -->
-        <div class="lg:col-span-5 reveal-item reveal-fade-right">
+        <!-- Right Column: Glassmorphic Portrait Frame (Desktop only, hidden on mobile) -->
+        <div class="hidden lg:block lg:col-span-5 reveal-item reveal-fade-right">
           <div class="relative mx-auto max-w-md">
             <!-- Decorative Glass Ring -->
             <div class="absolute -inset-3 rounded-3xl opacity-50 blur-xl" style="background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));"></div>
@@ -3528,7 +3553,11 @@
       document.getElementById("heroEyebrow").textContent = siteData.hero.eyebrow;
       document.getElementById("heroTitle").textContent = siteData.hero.title;
       document.getElementById("heroSummary").textContent = siteData.hero.summary;
-      document.getElementById("heroPortraitImg").src = siteData.hero.heroImage || window.FALLBACK_PORTRAIT_SVG;
+      const heroSrc = siteData.hero.heroImage || window.FALLBACK_PORTRAIT_SVG;
+      const deskHero = document.getElementById("heroPortraitImg");
+      if (deskHero) deskHero.src = heroSrc;
+      const mobHero = document.getElementById("heroPortraitImgMobile");
+      if (mobHero) mobHero.src = heroSrc;
       document.getElementById("aboutSecondaryImg").src = siteData.hero.aboutImage || window.FALLBACK_SECONDARY_SVG;
       document.getElementById("heroProfilePdfLink").href = siteData.hero.profilePdfUrl;
       document.getElementById("modalProfilePdfBtn").href = siteData.hero.profilePdfUrl;
@@ -4610,22 +4639,22 @@
 
         const isLightInitial = (siteData.colorMode === "light");
         material = new THREE.PointsMaterial({
-          color: isLightInitial ? 0xb45309 : 0xf59e0b,
-          size: isLightInitial ? 1.4 : 1.15,
+          color: isLightInitial ? 0xc27803 : 0xf59e0b,
+          size: 1.15,
           transparent: true,
-          opacity: isLightInitial ? 0.90 : 0.70
+          opacity: isLightInitial ? 0.60 : 0.70
         });
 
         particles = new THREE.Points(geometry, material);
         scene.add(particles);
 
-        // Subtle wireframe icosahedron in far background
+        // Subtle wireframe icosahedron globe in far background (gentle contrast so text is 100% effortless to read)
         const icoGeo = new THREE.IcosahedronGeometry(22, 1);
         icoMat = new THREE.MeshBasicMaterial({
-          color: isLightInitial ? 0x92400e : 0xd97706,
+          color: 0xd97706,
           wireframe: true,
           transparent: true,
-          opacity: isLightInitial ? 0.28 : 0.14
+          opacity: isLightInitial ? 0.12 : 0.14
         });
         lineMesh = new THREE.Mesh(icoGeo, icoMat);
         lineMesh.position.set(22, 4, -15);
@@ -4637,13 +4666,13 @@
           const isLight = (targetMode === "light");
           const { pointMat, lineMat } = window.__threeMaterials;
           if (pointMat) {
-            pointMat.color.setHex(isLight ? 0xb45309 : 0xf59e0b);
-            pointMat.opacity = isLight ? 0.90 : 0.70;
-            pointMat.size = isLight ? 1.4 : 1.15;
+            pointMat.color.setHex(isLight ? 0xc27803 : 0xf59e0b);
+            pointMat.opacity = isLight ? 0.60 : 0.70;
+            pointMat.size = 1.15;
           }
           if (lineMat) {
-            lineMat.color.setHex(isLight ? 0x92400e : 0xd97706);
-            lineMat.opacity = isLight ? 0.28 : 0.14;
+            lineMat.color.setHex(0xd97706);
+            lineMat.opacity = isLight ? 0.12 : 0.14;
           }
         };
         window.__updateThreeTheme(siteData.colorMode || "dark");
