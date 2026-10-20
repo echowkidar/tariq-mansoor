@@ -191,7 +191,7 @@
       color: #f8fafc !important;
     }
     body.mode-dark #threeBgCanvas {
-      opacity: 0.65 !important;
+      opacity: 0.75 !important;
     }
     body.mode-dark .ambient-orb {
       opacity: 0.35 !important;
@@ -208,10 +208,10 @@
       color: #0f172a !important;
     }
     body.mode-light #threeBgCanvas {
-      opacity: 0.12 !important;
+      opacity: 0.85 !important;
     }
     body.mode-light .ambient-orb {
-      opacity: 0.10 !important;
+      opacity: 0.18 !important;
     }
 
     /* Light Mode Navigation Bar */
@@ -3456,6 +3456,9 @@
       document.body.classList.remove("mode-dark", "mode-light");
       const mode = siteData.colorMode || "dark";
       document.body.classList.add("mode-" + mode);
+      if (window.__updateThreeTheme) {
+        window.__updateThreeTheme(mode);
+      }
       const modeStatus = document.getElementById("cmsColorModeStatus");
       if (modeStatus) modeStatus.textContent = "Current: " + (mode === "light" ? "Light Mode" : "Dark Mode");
 
@@ -4546,7 +4549,7 @@
     function initThreeJsBackground() {
       const canvas = document.getElementById("threeBgCanvas");
       if (!canvas || !window.THREE) return;
-      let renderer, scene, camera, particles, lineMesh;
+      let renderer, scene, camera, particles, lineMesh, material, icoMat;
       try {
         renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
         renderer.setSize(window.innerWidth, window.innerHeight);
@@ -4566,11 +4569,12 @@
         }
         geometry.setAttribute("position", new THREE.BufferAttribute(positions, 3));
 
-        const material = new THREE.PointsMaterial({
-          color: 0xf59e0b,
-          size: 1.15,
+        const isLightInitial = (siteData.colorMode === "light");
+        material = new THREE.PointsMaterial({
+          color: isLightInitial ? 0xb45309 : 0xf59e0b,
+          size: isLightInitial ? 1.4 : 1.15,
           transparent: true,
-          opacity: 0.65
+          opacity: isLightInitial ? 0.90 : 0.70
         });
 
         particles = new THREE.Points(geometry, material);
@@ -4578,15 +4582,32 @@
 
         // Subtle wireframe icosahedron in far background
         const icoGeo = new THREE.IcosahedronGeometry(22, 1);
-        const icoMat = new THREE.MeshBasicMaterial({
-          color: 0xd97706,
+        icoMat = new THREE.MeshBasicMaterial({
+          color: isLightInitial ? 0x92400e : 0xd97706,
           wireframe: true,
           transparent: true,
-          opacity: 0.08
+          opacity: isLightInitial ? 0.28 : 0.14
         });
         lineMesh = new THREE.Mesh(icoGeo, icoMat);
         lineMesh.position.set(22, 4, -15);
         scene.add(lineMesh);
+
+        window.__threeMaterials = { pointMat: material, lineMat: icoMat };
+        window.__updateThreeTheme = function(targetMode) {
+          if (!window.__threeMaterials) return;
+          const isLight = (targetMode === "light");
+          const { pointMat, lineMat } = window.__threeMaterials;
+          if (pointMat) {
+            pointMat.color.setHex(isLight ? 0xb45309 : 0xf59e0b);
+            pointMat.opacity = isLight ? 0.90 : 0.70;
+            pointMat.size = isLight ? 1.4 : 1.15;
+          }
+          if (lineMat) {
+            lineMat.color.setHex(isLight ? 0x92400e : 0xd97706);
+            lineMat.opacity = isLight ? 0.28 : 0.14;
+          }
+        };
+        window.__updateThreeTheme(siteData.colorMode || "dark");
 
         let mouseX = 0, mouseY = 0;
         window.addEventListener("mousemove", (e) => {
