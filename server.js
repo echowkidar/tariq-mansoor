@@ -76,6 +76,11 @@ app.get(['/', '/index.html'], (req, res) => {
   res.send(renderIndexWithEnv(false));
 });
 
+// Legacy WordPress URL fallback redirects (e.g. /index.php/*, /wp-admin, etc.)
+app.get(['/index.php', '/index.php/*', '/wp-admin*', '/wp-login*'], (req, res) => {
+  res.redirect(301, '/');
+});
+
 // 2. Dedicated Admin Panel Route (https://tariqmansoor.com/admin)
 // Automatically opens the Admin Password Login Gate & unlocks Control Panel + Theme Switcher upon authentication
 app.get(['/admin', '/admin/*'], (req, res) => {
