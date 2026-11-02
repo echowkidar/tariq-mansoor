@@ -8,6 +8,6 @@ RUN mkdir -p /app/data
 VOLUME ["/app/data"]
 ENV NODE_ENV=production
 ENV PORT=3000
-ENV DOMAIN=test.tariqmansoor.com
+ENV DOMAIN=tariqmansoor.com
 EXPOSE 3000
 CMD ["npm", "start"]

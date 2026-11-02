@@ -5,7 +5,7 @@ const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 3000;
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'TariqMansoor@2026';
-const DOMAIN = process.env.DOMAIN || 'test.tariqmansoor.com';
+const DOMAIN = process.env.DOMAIN || 'tariqmansoor.com';
 const DATA_DIR = path.join(__dirname, 'data');
 const STATE_FILE = path.join(DATA_DIR, 'site_state.json');
 
@@ -70,13 +70,13 @@ function renderIndexWithEnv(isAdminRoute) {
   return html.replace('<head>', '<head>\n  ' + envScript);
 }
 
-// 1. Public Website Route (https://tariqmansoor.com/ or https://test.tariqmansoor.com/)
+// 1. Public Website Route (https://tariqmansoor.com/)
 // Normal visitors NEVER see the Control Panel button or Theme Switcher buttons
 app.get(['/', '/index.html'], (req, res) => {
   res.send(renderIndexWithEnv(false));
 });
 
-// 2. Dedicated Admin Panel Route (https://tariqmansoor.com/admin or https://test.tariqmansoor.com/admin)
+// 2. Dedicated Admin Panel Route (https://tariqmansoor.com/admin)
 // Automatically opens the Admin Password Login Gate & unlocks Control Panel + Theme Switcher upon authentication
 app.get(['/admin', '/admin/*'], (req, res) => {
   res.send(renderIndexWithEnv(true));

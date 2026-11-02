@@ -10,16 +10,16 @@ services:
     environment:
       - NODE_ENV=production
       - PORT=3000
-      - DOMAIN=${DOMAIN:-test.tariqmansoor.com}
+      - DOMAIN=${DOMAIN:-tariqmansoor.com}
       - ADMIN_PASSWORD=${ADMIN_PASSWORD:-TariqMansoor@2026}
     volumes:
       - tariq_cms_data:/app/data
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.tariq-test.rule=Host(`${DOMAIN:-test.tariqmansoor.com}`)"
-      - "traefik.http.routers.tariq-test.entrypoints=websecure"
-      - "traefik.http.routers.tariq-test.tls.certresolver=letsencrypt"
-      - "traefik.http.services.tariq-test.loadbalancer.server.port=3000"
+      - "traefik.http.routers.tariq-portfolio.rule=Host(`${DOMAIN:-tariqmansoor.com}`) || Host(`www.${DOMAIN:-tariqmansoor.com}`)"
+      - "traefik.http.routers.tariq-portfolio.entrypoints=websecure"
+      - "traefik.http.routers.tariq-portfolio.tls.certresolver=letsencrypt"
+      - "traefik.http.services.tariq-portfolio.loadbalancer.server.port=3000"
 
 volumes:
   tariq_cms_data:

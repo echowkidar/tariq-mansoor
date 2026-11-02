@@ -14,7 +14,7 @@
     // Container Environment Variable Hook (Injected by Docker/Portainer server.js at runtime)
     window.__PORTAINER_ENV__ = window.__PORTAINER_ENV__ || {
       ADMIN_PASSWORD: "TariqMansoor@2026",
-      DOMAIN: "test.tariqmansoor.com",
+      DOMAIN: "tariqmansoor.com",
       STACK_ENV: "portainer-docker"
     };
   </script>
@@ -4953,7 +4953,7 @@
       // Initialize Three.js 3D Constellation
       initThreeJsBackground();
 
-      // Check if accessed via /admin route (https://tariqmansoor.com/admin or https://test.tariqmansoor.com/admin or #admin)
+      // Check if accessed via /admin route (https://tariqmansoor.com/admin or #admin)
       async function bootAdminRouteSequence() {
         syncAdminUiMode();
         await syncStateFromServerIfAvailable();
